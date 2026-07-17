@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import ParticlesBg from './components/ParticlesBg';
 import MagazineContent from './components/MagazineContent';
+import QuizContent from './components/QuizContent';
 
 // Milestone coordinates in SVG coordinate system (2000x1000)
 interface MilestoneCoord {
@@ -24,6 +25,7 @@ export default function App() {
   const pathRef = useRef<SVGPathElement>(null);
   
   // App state
+  const [currentTab, setCurrentTab] = useState<'timeline' | 'quiz'>('timeline');
   const [activeMilestone, setActiveMilestone] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
@@ -277,112 +279,165 @@ export default function App() {
       {/* Vignette lighting overlay */}
       <div className="vignette-overlay" />
 
-      {/* 2. Top Navigation header - fades out when zoomed in */}
-      <header className={`main-navbar ${activeMilestone !== null ? 'fade-out-element' : ''}`}>
-        <div className="brand-section">
-          <h1 className="brand-title">Đổi Mới 1986</h1>
-          <span className="brand-subtitle">Tạp chí số — Gen Z</span>
+      {/* 2. Top Navigation header - fades out when zoomed in timeline view */}
+      <header className={`main-navbar ${activeMilestone !== null && currentTab === 'timeline' ? 'fade-out-element' : ''}`}>
+        <div className="brand-section-wrapper">
+          <div className="brand-logo">D</div>
+          <div className="brand-section">
+            <h1 className="brand-title">Đổi Mới 1986</h1>
+            <span className="brand-subtitle">Tạp chí số — Gen Z</span>
+          </div>
         </div>
         <nav className="nav-links">
-          <span className="nav-link active">Tạp Chí Số</span>
-          <span className="nav-link">Quiz</span>
-          <span className="nav-link">Mini Game</span>
+          <button 
+            className={`nav-link ${currentTab === 'timeline' ? 'active' : ''}`}
+            onClick={() => {
+              if (!isTransitioning) {
+                setCurrentTab('timeline');
+                setActiveMilestone(null);
+              }
+            }}
+          >
+            <svg className="nav-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            Tạp Chí Số
+          </button>
+          
+          <button 
+            className={`nav-link ${currentTab === 'quiz' ? 'active' : ''}`}
+            onClick={() => {
+              if (!isTransitioning) {
+                setCurrentTab('quiz');
+              }
+            }}
+          >
+            <svg className="nav-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Quiz
+          </button>
+
+          <button 
+            className="nav-link" 
+            disabled 
+            style={{ opacity: 0.5, cursor: 'not-allowed' }}
+          >
+            <svg className="nav-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+              <path d="M12 12h.01"></path>
+              <path d="M17 10v4"></path>
+              <path d="M15 12h4"></path>
+              <path d="M6 12h4"></path>
+              <path d="M8 10v4"></path>
+            </svg>
+            Mini Game
+          </button>
         </nav>
       </header>
 
-      {/* 3. Main Landing Intro Title - fades out when zoomed in */}
-      <div className={`intro-overlay ${activeMilestone !== null ? 'fade-out-element' : ''}`}>
-        <div className="intro-tag">Tạp chí số đa phương tiện</div>
-        <h2 className="intro-title">
-          BƯỚC NGOẶT<br />
-          <span>ĐỔI MỚI</span>
-        </h2>
-        <p className="intro-desc">Từ khủng hoảng 1986 đến khát vọng 2045</p>
-        <div className="intro-hint">✦ Chạm vào mỗi mốc trên dòng chảy lịch sử để khám phá ✦</div>
-      </div>
+      {currentTab === 'timeline' ? (
+        <>
+          {/* 3. Main Landing Intro Title - fades out when zoomed in */}
+          <div className={`intro-overlay ${activeMilestone !== null ? 'fade-out-element' : ''}`}>
+            <div className="intro-tag">Tạp chí số đa phương tiện</div>
+            <h2 className="intro-title">
+              BƯỚC NGOẶT<br />
+              <span>ĐỔI MỚI</span>
+            </h2>
+            <p className="intro-desc">Từ khủng hoảng 1986 đến khát vọng 2045</p>
+            <div className="intro-hint">✦ Chạm vào mỗi mốc trên dòng chảy lịch sử để khám phá ✦</div>
+          </div>
 
-      {/* 4. Zoomable Timeline Viewport */}
-      <div className="timeline-viewport">
-        <div 
-          className={`timeline-canvas ${cameraTransitionClass ? 'camera-transition' : ''}`}
-          style={{
-            transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.scale})`
-          }}
-        >
-          <svg viewBox="0 0 2000 1000" className="timeline-svg">
-            <defs>
-              {/* Metallic Gold gradient for the path */}
-              <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#8f1d2b" />
-                <stop offset="30%" stopColor="#d4af37" />
-                <stop offset="70%" stopColor="#ffdf79" />
-                <stop offset="100%" stopColor="#d4af37" />
-              </linearGradient>
-            </defs>
+          {/* 4. Zoomable Timeline Viewport */}
+          <div className="timeline-viewport">
+            <div 
+              className={`timeline-canvas ${cameraTransitionClass ? 'camera-transition' : ''}`}
+              style={{
+                transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.scale})`
+              }}
+            >
+              <svg viewBox="0 0 2000 1000" className="timeline-svg">
+                <defs>
+                  {/* Metallic Gold gradient for the path */}
+                  <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8f1d2b" />
+                    <stop offset="30%" stopColor="#d4af37" />
+                    <stop offset="70%" stopColor="#ffdf79" />
+                    <stop offset="100%" stopColor="#d4af37" />
+                  </linearGradient>
+                </defs>
 
-            {/* Inactive dark background track */}
-            <path
-              d="M 50 500 C 150 490, 180 480, 250 480 C 350 480, 450 650, 550 650 C 650 650, 750 380, 850 380 C 950 380, 1050 520, 1150 520 C 1250 520, 1350 650, 1450 650 C 1550 650, 1650 480, 1750 480 C 1820 480, 1880 490, 1950 500"
-              className="path-background"
-            />
+                {/* Inactive dark background track */}
+                <path
+                  d="M 50 500 C 150 490, 180 480, 250 480 C 350 480, 450 650, 550 650 C 650 650, 750 380, 850 380 C 950 380, 1050 520, 1150 520 C 1250 520, 1350 650, 1450 650 C 1550 650, 1650 480, 1750 480 C 1820 480, 1880 490, 1950 500"
+                  className="path-background"
+                />
 
-            {/* Glowing active flow line path */}
-            <path
-              ref={pathRef}
-              d="M 50 500 C 150 490, 180 480, 250 480 C 350 480, 450 650, 550 650 C 650 650, 750 380, 850 380 C 950 380, 1050 520, 1150 520 C 1250 520, 1350 650, 1450 650 C 1550 650, 1650 480, 1750 480 C 1820 480, 1880 490, 1950 500"
-              className="path-flow-active"
-              strokeDasharray={totalPathLength}
-              strokeDashoffset={totalPathLength - flowCurrentLength}
-            />
+                {/* Glowing active flow line path */}
+                <path
+                  ref={pathRef}
+                  d="M 50 500 C 150 490, 180 480, 250 480 C 350 480, 450 650, 550 650 C 650 650, 750 380, 850 380 C 950 380, 1050 520, 1150 520 C 1250 520, 1350 650, 1450 650 C 1550 650, 1650 480, 1750 480 C 1820 480, 1880 490, 1950 500"
+                  className="path-flow-active"
+                  strokeDasharray={totalPathLength}
+                  strokeDashoffset={totalPathLength - flowCurrentLength}
+                />
 
-            {/* Glowing comet riding the active flow path edge */}
-            {totalPathLength > 0 && (
-              <g transform={`translate(${cometPosition.x}, ${cometPosition.y})`} className="comet-glow">
-                <circle r="14" fill="#ffcf5c" opacity="0.4" />
-                <circle r="7" fill="#ffffff" />
-              </g>
-            )}
-
-            {/* Milestones nodes */}
-            {milestoneCoords.map((node, idx) => {
-              const isActive = activeMilestone === idx;
-              return (
-                <g
-                  key={idx}
-                  className={`milestone-node ${isActive ? 'node-active' : ''}`}
-                  transform={`translate(${node.x}, ${node.y})`}
-                  onClick={() => handleNodeClick(idx)}
-                >
-                  <circle r="32" className="node-pulse-ring" />
-                  <circle r="20" className="node-pulse-ring-inner" />
-                  <circle r="12" className="node-outer" />
-                  <circle r="6" className="node-inner" />
-                  
-                  {/* Labels: Show in overview, fade out in detailed mode */}
-                  <g 
-                    transform="translate(0, 45)" 
-                    className="node-label-group"
-                    style={{ opacity: activeMilestone === null ? 1 : 0 }}
-                  >
-                    <text className="node-label-year" y="0">{node.year}</text>
-                    <text className="node-label-text" y="18">{node.label}</text>
+                {/* Glowing comet riding the active flow path edge */}
+                {totalPathLength > 0 && (
+                  <g transform={`translate(${cometPosition.x}, ${cometPosition.y})`} className="comet-glow">
+                    <circle r="14" fill="#ffcf5c" opacity="0.4" />
+                    <circle r="7" fill="#ffffff" />
                   </g>
-                </g>
-              );
-            })}
-          </svg>
-        </div>
-      </div>
+                )}
 
-      {/* 5. Detailed Magazine Panels */}
-      {activeMilestone !== null && (
-        <MagazineContent
-          milestoneIndex={activeMilestone}
-          onNext={handleNext}
-          onBack={handleBack}
-          isLast={activeMilestone === milestoneCoords.length - 1}
-          isVisible={contentVisible}
-        />
+                {/* Milestones nodes */}
+                {milestoneCoords.map((node, idx) => {
+                  const isActive = activeMilestone === idx;
+                  return (
+                    <g
+                      key={idx}
+                      className={`milestone-node ${isActive ? 'node-active' : ''}`}
+                      transform={`translate(${node.x}, ${node.y})`}
+                      onClick={() => handleNodeClick(idx)}
+                    >
+                      <circle r="32" className="node-pulse-ring" />
+                      <circle r="20" className="node-pulse-ring-inner" />
+                      <circle r="12" className="node-outer" />
+                      <circle r="6" className="node-inner" />
+                      
+                      {/* Labels: Show in overview, fade out in detailed mode */}
+                      <g 
+                        transform="translate(0, 45)" 
+                        className="node-label-group"
+                        style={{ opacity: activeMilestone === null ? 1 : 0 }}
+                      >
+                        <text className="node-label-year" y="0">{node.year}</text>
+                        <text className="node-label-text" y="18">{node.label}</text>
+                      </g>
+                    </g>
+                  );
+                })}
+              </svg>
+            </div>
+          </div>
+
+          {/* 5. Detailed Magazine Panels */}
+          {activeMilestone !== null && (
+            <MagazineContent
+              milestoneIndex={activeMilestone}
+              onNext={handleNext}
+              onBack={handleBack}
+              isLast={activeMilestone === milestoneCoords.length - 1}
+              isVisible={contentVisible}
+            />
+          )}
+        </>
+      ) : (
+        <QuizContent />
       )}
     </div>
   );
