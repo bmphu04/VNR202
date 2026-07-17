@@ -16,7 +16,7 @@ export interface MilestoneData {
 
 export const milestonesData: MilestoneData[] = [
   {
-    year: "1986",
+    year: "1975-1986",
     title: "BƯỚC NGOẶT ĐỔI MỚI",
     subtitle: "Khủng hoảng & Quyết định lịch sử",
     quote: "Đại hội Đảng Cộng sản Việt Nam lần thứ VI chính thức đưa ra đường lối Đổi Mới toàn diện, chuyển dịch từ kinh tế bao cấp sang kinh tế thị trường.",
@@ -139,12 +139,12 @@ export default function MagazineContent({
 
   return (
     <div className={`magazine-container ${isVisible ? 'fade-in' : 'fade-out'}`}>
-      
+
       {/* Background Watermark Year */}
       <div className="watermark-year">{data.year}</div>
 
       <div className="magazine-layout">
-        
+
         {/* Header Section */}
         <header className="magazine-header">
           <div className="magazine-year-tag">{data.year}</div>
@@ -155,7 +155,7 @@ export default function MagazineContent({
 
         {/* Content Body Grid */}
         <div className="magazine-body">
-          
+
           {/* Left Column: Story and Narrative */}
           <div className="magazine-col-left">
             <blockquote className="magazine-quote">
@@ -164,7 +164,7 @@ export default function MagazineContent({
             </blockquote>
             <p className="magazine-description">{data.description}</p>
             <p className="magazine-story">{data.story}</p>
-            
+
             <div className="magazine-highlights">
               <h4>Điểm nhấn sự kiện:</h4>
               <ul>
@@ -214,7 +214,7 @@ export default function MagazineContent({
           <button className="btn-back" onClick={onBack}>
             <span className="arrow">←</span> Quay lại Timeline
           </button>
-          
+
           {!isLast && (
             <button className="btn-next-step" onClick={onNext}>
               Tiếp theo <span className="arrow">→</span>
