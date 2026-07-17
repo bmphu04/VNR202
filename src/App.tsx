@@ -3,6 +3,7 @@ import './App.css';
 import ParticlesBg from './components/ParticlesBg';
 import MagazineContent from './components/MagazineContent';
 import QuizContent from './components/QuizContent';
+import MiniGame from './components/MinigameContent';
 
 // Milestone coordinates in SVG coordinate system (2000x1000)
 interface MilestoneCoord {
@@ -25,7 +26,7 @@ export default function App() {
   const pathRef = useRef<SVGPathElement>(null);
   
   // App state
-  const [currentTab, setCurrentTab] = useState<'timeline' | 'quiz'>('timeline');
+  const [currentTab, setCurrentTab] = useState<'timeline' | 'quiz' | 'minigame'>('timeline');
   const [activeMilestone, setActiveMilestone] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
@@ -331,9 +332,13 @@ export default function App() {
           </button>
 
           <button 
-            className="nav-link" 
-            disabled 
-            style={{ opacity: 0.5, cursor: 'not-allowed' }}
+            className={`nav-link ${currentTab === 'minigame' ? 'active' : ''}`}
+            onClick={() => {
+              if (!isTransitioning) {
+                setCurrentTab('minigame');
+              }
+            }}
+            style={{ cursor: 'pointer', opacity: 1 }} 
           >
             <svg className="nav-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="2"></rect>
@@ -348,7 +353,8 @@ export default function App() {
         </nav>
       </header>
 
-      {currentTab === 'timeline' ? (
+      {/* [ĐÃ CHỈNH SỬA TỪ ĐÂY TRỞ XUỐNG]: Thay vì dùng "? :" cho 2 tab, giờ tách ra hiển thị độc lập dựa vào currentTab bằng "&&" */}
+      {currentTab === 'timeline' && (
         <>
           {/* 3. Main Landing Intro Title - fades out when zoomed in */}
           <div className={`intro-overlay ${activeMilestone !== null ? 'fade-out-element' : ''}`}>
@@ -445,9 +451,14 @@ export default function App() {
             />
           )}
         </>
-      ) : (
-        <QuizContent />
       )}
+
+      {/* [ĐÃ CHỈNH SỬA]: Hiển thị component QuizContent khi ở tab Quiz */}
+      {currentTab === 'quiz' && <QuizContent />}
+
+      {/* [ĐÃ CHỈNH SỬA]: Hiển thị component MiniGame khi ở tab Mini Game */}
+      {currentTab === 'minigame' && <MiniGame />}
+
     </div>
   );
 }
