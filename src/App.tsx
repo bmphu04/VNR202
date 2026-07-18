@@ -5,6 +5,8 @@ import MagazineContent from './components/MagazineContent';
 import QuizContent from './components/QuizContent';
 import MiniGame from './components/MinigameContent';
 
+type TabKey = 'timeline' | 'quiz' | 'minigame';
+
 // Milestone coordinates in SVG coordinate system (2000x1000)
 interface MilestoneCoord {
   x: number;
@@ -44,10 +46,14 @@ export default function App() {
 
   const [flowCurrentLength, setFlowCurrentLength] = useState(0);
 
+  // Mobile menu state
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   // Resize handler
   useEffect(() => {
     const handleResize = () => {
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
+      if (window.innerWidth > 768) setMobileMenuOpen(false);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -289,13 +295,27 @@ export default function App() {
             <span className="brand-subtitle">Tạp chí số — Gen Z</span>
           </div>
         </div>
-        <nav className="nav-links">
-          <button 
+
+        <button
+          type="button"
+          className={`hamburger-btn ${mobileMenuOpen ? 'open' : ''}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen(prev => !prev)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav className={`nav-links ${mobileMenuOpen ? 'nav-open' : ''}`}>
+          <button
             className={`nav-link ${currentTab === 'timeline' ? 'active' : ''}`}
             onClick={() => {
               if (!isTransitioning) {
                 setCurrentTab('timeline');
                 setActiveMilestone(null);
+                setMobileMenuOpen(false);
               }
             }}
           >
@@ -306,7 +326,11 @@ export default function App() {
             Tạp Chí Số
           </button>
 
-          <a href="/map.html" className="nav-link">
+          <a
+            href="/map.html"
+            className="nav-link"
+            onClick={() => setMobileMenuOpen(false)}
+          >
             <svg className="nav-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
               <line x1="8" y1="2" x2="8" y2="18"></line>
@@ -314,12 +338,13 @@ export default function App() {
             </svg>
             Bản đồ
           </a>
-          
-          <button 
+
+          <button
             className={`nav-link ${currentTab === 'quiz' ? 'active' : ''}`}
             onClick={() => {
               if (!isTransitioning) {
                 setCurrentTab('quiz');
+                setMobileMenuOpen(false);
               }
             }}
           >
@@ -331,14 +356,15 @@ export default function App() {
             Quiz
           </button>
 
-          <button 
+          <button
             className={`nav-link ${currentTab === 'minigame' ? 'active' : ''}`}
             onClick={() => {
               if (!isTransitioning) {
                 setCurrentTab('minigame');
+                setMobileMenuOpen(false);
               }
             }}
-            style={{ cursor: 'pointer', opacity: 1 }} 
+            style={{ cursor: 'pointer', opacity: 1 }}
           >
             <svg className="nav-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="2"></rect>
