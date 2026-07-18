@@ -13,15 +13,26 @@
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-body {
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
   background-color: var(--color-bg-dark);
   color: var(--color-text-light);
   font-family: var(--font-sans);
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
 }
 
 #root {
@@ -34,6 +45,16 @@ body {
   text-align: left;
   display: block;
   box-sizing: border-box;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Base Layout Container */
@@ -57,7 +78,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
-  z-index: 10;
+  z-index: 20;
   transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -65,6 +86,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  z-index: 21;
 }
 
 .brand-logo {
@@ -82,6 +104,7 @@ body {
   border: 1px solid rgba(229, 184, 66, 0.35);
   box-shadow: 0 0 10px rgba(143, 29, 43, 0.5);
   user-select: none;
+  flex-shrink: 0;
 }
 
 .brand-section {
@@ -97,6 +120,7 @@ body {
   color: #fff;
   margin: 0;
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .brand-subtitle {
@@ -110,6 +134,7 @@ body {
 .nav-links {
   display: flex;
   gap: 15px;
+  align-items: center;
 }
 
 .nav-link {
@@ -127,11 +152,13 @@ body {
   align-items: center;
   gap: 6px;
   font-family: var(--font-sans);
+  white-space: nowrap;
 }
 
 .nav-icon {
   display: inline-block;
   vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .nav-link.active {
@@ -147,6 +174,41 @@ body {
   border-color: var(--color-gold);
   box-shadow: 0 0 15px var(--color-gold-glow);
   transform: translateY(-2px);
+}
+
+/* Hamburger button (hidden on desktop) */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  z-index: 22;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--color-gold);
+  border-radius: 3px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-btn.open span:nth-child(1) {
+  transform: translateY(10.5px) rotate(45deg);
+}
+
+.hamburger-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.open span:nth-child(3) {
+  transform: translateY(-10.5px) rotate(-45deg);
 }
 
 /* Landing Text Title Overlay */
@@ -240,7 +302,6 @@ body {
   transform-origin: 0 0;
 }
 
-/* Add this class in React when we want smooth CSS-based zoom in/out */
 .camera-transition {
   transition: transform 1.4s cubic-bezier(0.25, 1, 0.3, 1);
 }
@@ -265,10 +326,9 @@ body {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: stroke-dashoffset 0.1s ease-out; /* Smooth progression drawing */
+  transition: stroke-dashoffset 0.1s ease-out;
 }
 
-/* Timeline Milestone Nodes */
 .milestone-node {
   cursor: pointer;
   pointer-events: all;
@@ -282,22 +342,22 @@ body {
 }
 
 .milestone-node:hover .node-outer {
-  r: 16px; /* expands from 12 */
+  r: 16px;
   stroke-width: 4px;
   stroke: var(--color-gold-bright);
 }
 
 .milestone-node:hover .node-inner {
-  r: 8px; /* expands from 6 */
+  r: 8px;
   fill: #fff;
 }
 
 .milestone-node:hover .node-pulse-ring {
-  r: 40px; /* expands from 32 */
+  r: 40px;
 }
 
 .milestone-node:hover .node-pulse-ring-inner {
-  r: 26px; /* expands from 20 */
+  r: 26px;
 }
 
 .node-pulse-ring {
@@ -336,7 +396,6 @@ body {
   fill: #fff;
 }
 
-/* Timeline Labels underneath the nodes */
 .node-label-group {
   pointer-events: none;
   text-anchor: middle;
@@ -359,7 +418,6 @@ body {
   letter-spacing: 1px;
 }
 
-/* Glowing Comet */
 .comet-glow {
   filter: drop-shadow(0 0 8px #ff9f1c);
 }
@@ -377,10 +435,10 @@ body {
   z-index: 8;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Push content to the right side */
-  padding: 0 6% 0 35%; /* Big left padding to prevent overlapping node */
+  justify-content: flex-end;
+  padding: 0 6% 0 35%;
   box-sizing: border-box;
-  pointer-events: none; /* Let clicks pass through background */
+  pointer-events: none;
 }
 
 .magazine-container.fade-in {
@@ -423,7 +481,6 @@ body {
   scrollbar-color: rgba(229, 184, 66, 0.3) transparent;
 }
 
-/* Custom scrollbar */
 .magazine-layout::-webkit-scrollbar {
   width: 6px;
 }
@@ -477,7 +534,6 @@ body {
   border-radius: 2px;
 }
 
-/* Grid columns */
 .magazine-body {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -555,7 +611,6 @@ body {
   font-size: 0.8rem;
 }
 
-/* Right column stats and graphics card */
 .magazine-col-right {
   display: flex;
   flex-direction: column;
@@ -602,6 +657,7 @@ body {
   font-weight: 700;
   color: var(--color-gold);
   line-height: 1;
+  word-break: break-word;
 }
 
 .stat-label {
@@ -688,7 +744,6 @@ body {
   margin-left: 10px;
 }
 
-/* Footer & Custom Navigation Buttons */
 .magazine-footer {
   display: flex;
   justify-content: space-between;
@@ -696,6 +751,8 @@ body {
   margin-top: 20px;
   border-top: 1px solid rgba(229, 184, 66, 0.1);
   padding-top: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .btn-back {
@@ -767,51 +824,385 @@ body {
   100% { transform: scale(2.2); opacity: 0; }
 }
 
-/* Responsive configurations */
+/* ==========================================================================
+   BREAKPOINT: 1400px - Large desktop
+   ========================================================================== */
+@media (max-width: 1400px) {
+  .intro-title {
+    font-size: 3.5rem;
+  }
+  .watermark-year {
+    font-size: 20rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 1200px - Tablet landscape / small desktop
+   ========================================================================== */
 @media (max-width: 1200px) {
   .magazine-container {
     padding: 0 4% 0 40%;
   }
   .watermark-year {
     left: 35%;
-    font-size: 18rem;
+    font-size: 16rem;
   }
   .magazine-title {
     font-size: 2.2rem;
   }
+  .intro-title {
+    font-size: 3rem;
+  }
 }
 
+/* ==========================================================================
+   BREAKPOINT: 1024px - Tablet landscape
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .main-navbar {
+    padding: 0 3%;
+  }
+  .nav-link {
+    padding: 7px 14px;
+    font-size: 0.78rem;
+  }
+  .magazine-body {
+    gap: 30px;
+  }
+  .stat-value {
+    font-size: 1.8rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 900px - Tablet portrait / large mobile
+   ========================================================================== */
 @media (max-width: 900px) {
   body {
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .app-container {
     height: auto;
     min-height: 100vh;
     overflow-y: auto;
   }
+  .main-navbar {
+    height: 70px;
+    padding: 0 4%;
+  }
+  .brand-title {
+    font-size: 1.05rem;
+  }
+  .brand-subtitle {
+    font-size: 0.5rem;
+    letter-spacing: 2px;
+  }
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  /* Hamburger menu visible */
+  .hamburger-btn {
+    display: flex;
+  }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    flex-direction: column;
+    background: rgba(12, 1, 2, 0.98);
+    backdrop-filter: blur(12px);
+    padding: 100px 24px 30px 24px;
+    gap: 12px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 19;
+    border-left: 1px solid rgba(229, 184, 66, 0.15);
+    overflow-y: auto;
+  }
+  .nav-links.nav-open {
+    transform: translateX(0);
+  }
+  .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+
+  /* Timeline viewport on tablet/mobile */
   .timeline-viewport {
     position: relative;
-    height: 500px;
+    height: 420px;
   }
   .timeline-canvas {
-    transform: scale(0.4) !important; /* Force fit on mobile */
+    transform: scale(0.4) !important;
+    transform-origin: center center !important;
   }
+  .intro-title {
+    font-size: 2.4rem;
+  }
+  .intro-desc {
+    font-size: 1rem;
+  }
+  .intro-tag {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+  }
+  .intro-hint {
+    font-size: 0.78rem;
+    padding: 0 16px;
+  }
+
+  /* Magazine - stack on tablet */
   .magazine-container {
     position: relative;
     width: 100%;
     height: auto;
-    padding: 30px 5%;
+    min-height: auto;
+    padding: 100px 5% 50px 5%;
     justify-content: center;
+    align-items: flex-start;
+  }
+  .magazine-layout {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
   }
   .magazine-body {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
   .watermark-year {
     display: none;
   }
+  .magazine-title {
+    font-size: 2rem;
+  }
+  .magazine-subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+  }
+  .magazine-quote {
+    font-size: 1.1rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 768px - Tablet portrait
+   ========================================================================== */
+@media (max-width: 768px) {
+  .main-navbar {
+    height: 64px;
+  }
+  .brand-section-wrapper {
+    gap: 10px;
+  }
+  .brand-title {
+    font-size: 1rem;
+  }
+  .brand-subtitle {
+    font-size: 0.45rem;
+    letter-spacing: 2px;
+  }
+  .brand-logo {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  .timeline-viewport {
+    height: 360px;
+  }
+  .timeline-canvas {
+    transform: scale(0.32) !important;
+  }
+  .intro-overlay {
+    top: 8%;
+  }
   .intro-title {
-    font-size: 2.8rem;
+    font-size: 2rem;
+  }
+  .intro-desc {
+    font-size: 0.92rem;
+    margin-bottom: 16px;
+  }
+  .intro-tag {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .intro-hint {
+    font-size: 0.75rem;
+  }
+  .magazine-container {
+    padding: 90px 5% 40px 5%;
+  }
+  .magazine-title {
+    font-size: 1.7rem;
+  }
+  .magazine-year-tag {
+    font-size: 1.2rem;
+    padding: 2px 10px;
+  }
+  .magazine-subtitle {
+    font-size: 0.85rem;
+  }
+  .magazine-quote {
+    font-size: 1rem;
+    padding-left: 16px;
+  }
+  .magazine-description,
+  .magazine-story {
+    font-size: 0.9rem;
+  }
+  .stats-card,
+  .vintage-visual-card {
+    padding: 18px;
+  }
+  .stat-value {
+    font-size: 1.6rem;
+  }
+  .magazine-footer {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+  .btn-back,
+  .btn-next-step {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 600px - Mobile large
+   ========================================================================== */
+@media (max-width: 600px) {
+  .main-navbar {
+    padding: 0 16px;
+  }
+  .brand-section {
+    max-width: 180px;
+    overflow: hidden;
+  }
+  .brand-title {
+    font-size: 0.95rem;
+  }
+  .brand-subtitle {
+    font-size: 0.4rem;
+    letter-spacing: 1.5px;
+  }
+  .timeline-viewport {
+    height: 320px;
+  }
+  .timeline-canvas {
+    transform: scale(0.27) !important;
+  }
+  .intro-overlay {
+    top: 6%;
+    width: 92%;
+  }
+  .intro-title {
+    font-size: 1.7rem;
+  }
+  .intro-desc {
+    font-size: 0.85rem;
+  }
+  .magazine-container {
+    padding: 80px 16px 30px 16px;
+  }
+  .magazine-title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .magazine-header {
+    margin-bottom: 20px;
+  }
+  .magazine-body {
+    gap: 25px;
+    margin-bottom: 25px;
+  }
+  .magazine-quote {
+    font-size: 0.95rem;
+  }
+  .magazine-highlights li {
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 420px - Mobile small
+   ========================================================================== */
+@media (max-width: 420px) {
+  .timeline-viewport {
+    height: 280px;
+  }
+  .timeline-canvas {
+    transform: scale(0.22) !important;
+  }
+  .intro-title {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  .intro-tag {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+  }
+  .intro-desc {
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+  }
+  .intro-hint {
+    font-size: 0.7rem;
+  }
+  .magazine-title {
+    font-size: 1.3rem;
+  }
+  .magazine-year-tag {
+    font-size: 1.05rem;
+  }
+  .magazine-subtitle {
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+  }
+  .stat-value {
+    font-size: 1.4rem;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+  }
+  .stat-desc {
+    font-size: 0.7rem;
+  }
+  .btn-back,
+  .btn-next-step {
+    font-size: 0.8rem;
+    padding: 10px 18px;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT: 360px - Extra small mobile
+   ========================================================================== */
+@media (max-width: 360px) {
+  .timeline-viewport {
+    height: 240px;
+  }
+  .timeline-canvas {
+    transform: scale(0.18) !important;
+  }
+  .intro-title {
+    font-size: 1.2rem;
+  }
+  .brand-title {
+    font-size: 0.85rem;
+  }
+  .brand-subtitle {
+    display: none;
   }
 }
 
@@ -835,6 +1226,8 @@ body {
 .quiz-header {
   text-align: center;
   margin-bottom: 35px;
+  width: 100%;
+  max-width: 900px;
 }
 
 .quiz-section-tag {
@@ -863,16 +1256,15 @@ body {
   font-style: italic;
 }
 
-/* Quiz Card Container */
 .quiz-card {
-  background-color: #f7f2e8; /* Cream paper background */
+  background-color: #f7f2e8;
   border-radius: 12px;
   width: 100%;
   max-width: 900px;
   padding: 40px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(229, 184, 66, 0.15);
   box-sizing: border-box;
-  color: #1a0205; /* Deep dark red-black text */
+  color: #1a0205;
   position: relative;
 }
 
@@ -883,6 +1275,8 @@ body {
   margin-bottom: 30px;
   border-bottom: 1px solid rgba(143, 29, 43, 0.08);
   padding-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .question-counter {
@@ -892,34 +1286,27 @@ body {
   letter-spacing: 1px;
 }
 
-/* Progress Segment Bar */
 .progress-segments {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .progress-segment-item {
   width: 25px;
   height: 6px;
-  background-color: #e2dac8; /* Unfilled */
+  background-color: #e2dac8;
   border-radius: 3px;
   transition: all 0.3s ease;
 }
 
 .progress-segment-item.active {
-  background-color: #8f1d2b; 
+  background-color: #8f1d2b;
   box-shadow: 0 0 6px rgba(143, 29, 43, 0.4);
 }
 
 .progress-segment-item.passed {
-  background-color: #aa8c2c; 
-}
-
-.quiz-card-body {
-  display: grid;
-  grid-template-columns: 1.1fr 1px 0.9fr;
-  gap: 40px;
-  margin-bottom: 25px;
+  background-color: #aa8c2c;
 }
 
 .quiz-card-body {
@@ -977,6 +1364,7 @@ body {
   box-shadow: 0 2px 4px rgba(143, 29, 43, 0.03);
   font-family: var(--font-sans);
   width: 100%;
+  box-sizing: border-box;
 }
 
 .option-letter {
@@ -984,6 +1372,7 @@ body {
   color: #8f1d2b;
   margin-right: 12px;
   font-size: 1.05rem;
+  flex-shrink: 0;
 }
 
 .option-text {
@@ -1037,7 +1426,6 @@ body {
 .option-indicator-icon.correct {
   color: #10b981;
 }
-
 .option-indicator-icon.incorrect {
   color: #ef4444;
 }
@@ -1189,7 +1577,11 @@ body {
   background: linear-gradient(135deg, #c5a438 0%, #aa8c2c 100%);
 }
 
-@media (max-width: 800px) {
+/* Quiz responsive */
+@media (max-width: 900px) {
+  .quiz-container {
+    padding: 100px 16px 40px 16px;
+  }
   .quiz-card-body {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -1204,7 +1596,86 @@ body {
   .quiz-question-text {
     font-size: 1.4rem;
   }
+  .quiz-main-title {
+    font-size: 2.2rem;
+  }
+  .quiz-subtitle {
+    font-size: 0.85rem;
+  }
 }
+
+@media (max-width: 768px) {
+  .quiz-container {
+    padding: 90px 16px 30px 16px;
+  }
+  .quiz-card {
+    padding: 24px 20px;
+  }
+  .quiz-main-title {
+    font-size: 1.8rem;
+  }
+  .quiz-question-text {
+    font-size: 1.2rem;
+  }
+  .quiz-card-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+  .progress-segment-item {
+    width: 18px;
+    height: 5px;
+  }
+  .progress-segments {
+    gap: 5px;
+  }
+  .question-counter {
+    font-size: 0.78rem;
+  }
+  .result-card {
+    padding: 30px 20px;
+  }
+  .result-score-circle {
+    width: 110px;
+    height: 110px;
+  }
+  .score-num {
+    font-size: 2.8rem;
+  }
+  .result-heading {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-card {
+    padding: 20px 16px;
+    border-radius: 10px;
+  }
+  .quiz-question-text {
+    font-size: 1.1rem;
+  }
+  .quiz-option-button {
+    padding: 12px 14px;
+    font-size: 0.88rem;
+  }
+  .option-letter {
+    font-size: 0.95rem;
+    margin-right: 8px;
+  }
+  .btn-next-question,
+  .btn-restart {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+  .expl-text {
+    font-size: 0.82rem;
+  }
+}
+
+/* ==========================================================================
+   MINIGAME STYLING
+   ========================================================================== */
 
 .minigame-layout {
   display: flex;
@@ -1220,10 +1691,11 @@ body {
   padding: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   flex: 1;
+  box-sizing: border-box;
 }
 
 .timeline-panel {
-  flex: 1.3; 
+  flex: 1.3;
 }
 
 .mg-panel-title {
@@ -1235,7 +1707,6 @@ body {
   padding-bottom: 10px;
 }
 
-/* Lưới Timeline 2 cột */
 .timeline-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1272,6 +1743,7 @@ body {
   padding: 5px;
   transition: all 0.3s ease;
   background: #faf8f8;
+  box-sizing: border-box;
 }
 
 .slot-dropzone.is-over {
@@ -1298,7 +1770,7 @@ body {
   flex-direction: column;
   gap: 16px;
   min-height: 500px;
-  padding: 5px 0; 
+  padding: 5px 0;
 }
 
 .pool-empty {
@@ -1323,7 +1795,9 @@ body {
   overflow: hidden;
   transition: box-shadow 0.2s, transform 0.2s;
   width: 100%;
-  min-height: 80px; 
+  min-height: 80px;
+  touch-action: none;
+  user-select: none;
 }
 
 .minigame-card:hover {
@@ -1349,7 +1823,7 @@ body {
   font-size: 0.95rem;
   color: #333;
   line-height: 1.5;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .minigame-card.correct {
@@ -1380,6 +1854,13 @@ body {
   display: flex;
   gap: 15px;
   margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.mg-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .btn-mg {
@@ -1391,7 +1872,10 @@ body {
   transition: all 0.3s;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
 }
 
 .btn-mg.check {
@@ -1419,48 +1903,155 @@ body {
 
 .mg-result-text {
   margin-top: 25px !important;
-  font-weight: 800 !important; 
-  color: #8f1d2b !important; 
+  font-weight: 800 !important;
+  color: #8f1d2b !important;
   text-align: center;
   font-size: 1.1rem;
   opacity: 1 !important;
-  text-shadow: 0px 0px 1px rgba(143, 29, 43, 0.2); 
+  text-shadow: 0px 0px 1px rgba(143, 29, 43, 0.2);
 }
 
 .mg-result-badge {
-  margin-top: 25px;
+  margin-top: 20px;
   padding: 15px 25px;
   border-radius: 8px;
-  font-weight: 800 !important; /* Ép buộc chữ in đậm */
+  font-weight: 800 !important;
   font-size: 1.1rem;
   text-align: center;
-  opacity: 1 !important; /* Ép buộc hiển thị rõ 100%, không bị mờ/trong suốt */
+  opacity: 1 !important;
   width: 100%;
   box-sizing: border-box;
-  -webkit-font-smoothing: antialiased; /* Khử răng cưa giúp chữ nét hơn */
-  text-shadow: none !important; /* Xóa bóng chữ rườm rà nếu có */
+  -webkit-font-smoothing: antialiased;
+  text-shadow: none !important;
 }
 
-/* Khi người chơi đạt 6/6 (Màu xanh lá) */
 .mg-result-badge.success {
-  background-color: #e8f5e9 !important; /* Nền xanh nhạt */
-  color: #1b5e20 !important; /* Chữ xanh lá cây siêu đậm */
-  border: 2px solid #a5d6a7 !important; /* Viền xanh */
+  background-color: #e8f5e9 !important;
+  color: #1b5e20 !important;
+  border: 2px solid #a5d6a7 !important;
 }
 
-/* Khi người chơi chưa đạt (Màu cam đỏ) */
 .mg-result-badge.warning {
-  background-color: #fff8e1 !important; /* Nền vàng/cam nhạt */
-  color: #d84315 !important; /* Chữ màu cam/đỏ cực đậm để dễ đọc */
-  border: 2px solid #ffcc80 !important; /* Viền cam */
+  background-color: #fff8e1 !important;
+  color: #d84315 !important;
+  border: 2px solid #ffcc80 !important;
 }
 
-/* Responsive */
+/* Minigame responsive */
+@media (max-width: 1100px) {
+  .minigame-layout {
+    gap: 20px;
+  }
+  .mg-panel {
+    padding: 24px;
+  }
+  .mg-panel-title {
+    font-size: 1.3rem;
+  }
+  .timeline-grid {
+    gap: 14px;
+  }
+}
+
 @media (max-width: 900px) {
   .minigame-layout {
     flex-direction: column;
+    gap: 20px;
+  }
+  .timeline-panel,
+  .events-panel {
+    flex: 1;
   }
   .timeline-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .events-pool {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mg-panel {
+    padding: 18px;
+    border-radius: 12px;
+  }
+  .mg-panel-title {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+  }
+  .timeline-slot-wrapper {
+    flex-direction: column;
+  }
+  .slot-year {
+    min-width: auto;
+    padding: 8px 14px;
+    width: 100%;
+    border-bottom: 1px solid rgba(143, 29, 43, 0.08);
+  }
+  .slot-dropzone {
+    min-height: 70px;
+  }
+  .minigame-card {
+    padding: 14px 16px;
+    min-height: 70px;
+  }
+  .minigame-card p {
+    font-size: 0.88rem;
+  }
+  .btn-mg {
+    padding: 10px 20px;
+    font-size: 0.88rem;
+    flex: 1;
+  }
+  .slot-year {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mg-panel {
+    padding: 14px;
+  }
+  .mg-panel-title {
+    font-size: 1.1rem;
+  }
+  .timeline-grid {
+    gap: 12px;
+  }
+  .slot-placeholder {
+    font-size: 0.8rem;
+  }
+  .minigame-card {
+    padding: 12px 14px;
+    min-height: 64px;
+  }
+  .minigame-card p {
+    font-size: 0.85rem;
+  }
+  .slot-year {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+  .mg-actions {
+    gap: 10px;
+  }
+  .mg-result-badge {
+    font-size: 0.95rem !important;
+    padding: 12px 16px !important;
+  }
+}
+
+/* Improve touch targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .nav-link {
+    padding: 12px 16px;
+  }
+  .quiz-option-button {
+    padding: 14px 18px;
+  }
+  .minigame-card {
+    cursor: grab;
+    -webkit-user-drag: none;
   }
 }
