@@ -5,8 +5,6 @@ import MagazineContent from './components/MagazineContent';
 import QuizContent from './components/QuizContent';
 import MiniGame from './components/MinigameContent';
 
-type TabKey = 'timeline' | 'quiz' | 'minigame';
-
 // Milestone coordinates in SVG coordinate system (2000x1000)
 interface MilestoneCoord {
   x: number;
