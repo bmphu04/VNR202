@@ -4,8 +4,10 @@ import ParticlesBg from './components/ParticlesBg';
 import MagazineContent from './components/MagazineContent';
 import QuizContent from './components/QuizContent';
 import MiniGame from './components/MinigameContent';
+import logoImg from './assets/logo.png';
+import poinImg from './assets/poin.png';
 
-// Milestone coordinates in SVG coordinate system (2000x1000)
+// Milestone coordinates in SVG coordinate system (2400x1000) - Phân bổ cân đối, trải dài trọn vẹn khung hình
 interface MilestoneCoord {
   x: number;
   y: number;
@@ -14,12 +16,13 @@ interface MilestoneCoord {
 }
 
 const milestoneCoords: MilestoneCoord[] = [
-  { x: 250, y: 480, year: "1986", label: "Khủng hoảng & Quyết định" },
-  { x: 550, y: 650, year: "1989", label: "Kỳ tích gạo xuất khẩu" },
-  { x: 850, y: 380, year: "1995", label: "Bắt tay mở cửa hội nhập" },
-  { x: 1150, y: 520, year: "2007", label: "Gia nhập WTO thế giới" },
-  { x: 1450, y: 650, year: "2020", label: "Kinh tế số quốc gia" },
-  { x: 1750, y: 480, year: "2045", label: "Việt Nam Hùng Cường" }
+  { x: 180, y: 480, year: "1986", label: "Khủng hoảng & Quyết định" },
+  { x: 500, y: 650, year: "1989", label: "Kỳ tích gạo xuất khẩu" },
+  { x: 820, y: 380, year: "1995", label: "Bắt tay mở cửa hội nhập" },
+  { x: 1140, y: 520, year: "2007", label: "Gia nhập WTO thế giới" },
+  { x: 1460, y: 650, year: "2020", label: "Kinh tế số quốc gia" },
+  { x: 1780, y: 480, year: "2026", label: "Việt Nam Hùng Cường" },
+  { x: 2100, y: 590, year: "40 Năm", label: "Tổng kết Đổi Mới" }
 ];
 
 export default function App() {
@@ -86,11 +89,11 @@ export default function App() {
     }
   }, []);
 
-  // Compute responsive layout variables
-  const fitScale = Math.min(dimensions.width / 2000, dimensions.height / 1000);
+  // Compute responsive layout variables (Scale theo chiều rộng 2400 để line tràn viền màn hình hoàn hảo)
+  const fitScale = dimensions.width / 2400;
   
   const overviewCamera = {
-    x: (dimensions.width - 2000 * fitScale) / 2,
+    x: (dimensions.width - 2400 * fitScale) / 2,
     y: (dimensions.height - 1000 * fitScale) / 2 + 120 * fitScale, // Shift down to avoid collision with header title
     scale: fitScale
   };
@@ -287,9 +290,11 @@ export default function App() {
       {/* 2. Top Navigation header - fades out when zoomed in timeline view */}
       <header className={`main-navbar ${activeMilestone !== null && currentTab === 'timeline' ? 'fade-out-element' : ''}`}>
         <div className="brand-section-wrapper">
-          <div className="brand-logo">D</div>
+          <div className="brand-logo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: 'transparent', width: 'auto', height: '40px', borderRadius: '4px' }}>
+            <img src={logoImg} alt="Logo" style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
+          </div>
           <div className="brand-section">
-            <h1 className="brand-title">Đổi Mới 1986</h1>
+            <h1 className="brand-title">40 Năm đổi mới</h1>
             <span className="brand-subtitle">Tạp chí số — Gen Z</span>
           </div>
         </div>
@@ -377,7 +382,7 @@ export default function App() {
         </nav>
       </header>
 
-      {/* [ĐÃ CHỈNH SỬA TỪ ĐÂY TRỞ XUỐNG]: Thay vì dùng "? :" cho 2 tab, giờ tách ra hiển thị độc lập dựa vào currentTab bằng "&&" */}
+      {/* Main timeline tab content */}
       {currentTab === 'timeline' && (
         <>
           {/* 3. Main Landing Intro Title - fades out when zoomed in */}
@@ -387,7 +392,7 @@ export default function App() {
               BƯỚC NGOẶT<br />
               <span>ĐỔI MỚI</span>
             </h2>
-            <p className="intro-desc">Từ khủng hoảng 1986 đến khát vọng 2045</p>
+            <p className="intro-desc">Từ khủng hoảng 1986 đến khát vọng 2026</p>
             <div className="intro-hint">✦ Chạm vào mỗi mốc trên dòng chảy lịch sử để khám phá ✦</div>
           </div>
 
@@ -399,7 +404,8 @@ export default function App() {
                 transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.scale})`
               }}
             >
-              <svg viewBox="0 0 2000 1000" className="timeline-svg">
+              {/* ViewBox 2400 giúp đường line kéo giãn trọn vẹn từ mép trái sang mép phải màn hình */}
+              <svg viewBox="0 0 2400 1000" className="timeline-svg">
                 <defs>
                   {/* Metallic Gold gradient for the path */}
                   <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -410,16 +416,16 @@ export default function App() {
                   </linearGradient>
                 </defs>
 
-                {/* Inactive dark background track */}
+                {/* Inactive dark background track - Kéo dài mượt mà từ 0 đến 2400 */}
                 <path
-                  d="M 50 500 C 150 490, 180 480, 250 480 C 350 480, 450 650, 550 650 C 650 650, 750 380, 850 380 C 950 380, 1050 520, 1150 520 C 1250 520, 1350 650, 1450 650 C 1550 650, 1650 480, 1750 480 C 1820 480, 1880 490, 1950 500"
+                  d="M 0 500 C 60 500, 120 480, 180 480 C 340 480, 340 650, 500 650 C 660 650, 660 380, 820 380 C 980 380, 980 520, 1140 520 C 1300 520, 1300 650, 1460 650 C 1620 650, 1620 480, 1780 480 C 1940 480, 2020 590, 2100 590 C 2200 590, 2300 520, 2400 520"
                   className="path-background"
                 />
 
                 {/* Glowing active flow line path */}
                 <path
                   ref={pathRef}
-                  d="M 50 500 C 150 490, 180 480, 250 480 C 350 480, 450 650, 550 650 C 650 650, 750 380, 850 380 C 950 380, 1050 520, 1150 520 C 1250 520, 1350 650, 1450 650 C 1550 650, 1650 480, 1750 480 C 1820 480, 1880 490, 1950 500"
+                  d="M 0 500 C 60 500, 120 480, 180 480 C 340 480, 340 650, 500 650 C 660 650, 660 380, 820 380 C 980 380, 980 520, 1140 520 C 1300 520, 1300 650, 1460 650 C 1620 650, 1620 480, 1780 480 C 1940 480, 2020 590, 2100 590 C 2200 590, 2300 520, 2400 520"
                   className="path-flow-active"
                   strokeDasharray={totalPathLength}
                   strokeDashoffset={totalPathLength - flowCurrentLength}
@@ -442,11 +448,18 @@ export default function App() {
                       className={`milestone-node ${isActive ? 'node-active' : ''}`}
                       transform={`translate(${node.x}, ${node.y})`}
                       onClick={() => handleNodeClick(idx)}
+                      style={{ cursor: 'pointer' }}
                     >
                       <circle r="32" className="node-pulse-ring" />
-                      <circle r="20" className="node-pulse-ring-inner" />
-                      <circle r="12" className="node-outer" />
-                      <circle r="6" className="node-inner" />
+      
+                      <image
+                        href={poinImg}
+                        x="-20"
+                        y="-20"
+                        width="40"
+                        height="40"
+                        style={{ objectFit: 'contain' }}
+                      />
                       
                       {/* Labels: Show in overview, fade out in detailed mode */}
                       <g 
@@ -477,10 +490,10 @@ export default function App() {
         </>
       )}
 
-      {/* [ĐÃ CHỈNH SỬA]: Hiển thị component QuizContent khi ở tab Quiz */}
+      {/* Quiz tab */}
       {currentTab === 'quiz' && <QuizContent />}
 
-      {/* [ĐÃ CHỈNH SỬA]: Hiển thị component MiniGame khi ở tab Mini Game */}
+      {/* Mini Game tab */}
       {currentTab === 'minigame' && <MiniGame />}
 
     </div>
