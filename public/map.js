@@ -969,9 +969,11 @@ function buildLayer6() {
 function finishLoading() {
   setTimeout(() => {
     const el = document.getElementById("loading");
-    el.style.opacity = "0";
-    setTimeout(() => el.style.display = "none", 800);
-  }, 2200);
+    if (el) {
+      el.style.opacity = "0";
+      setTimeout(() => el.style.display = "none", 400);
+    }
+  }, 600);
 }
 
 // ── Animate Flow Lines ──────────────────────────────────────
