@@ -122,8 +122,8 @@
       background: rgba(255,255,255,0.95);
       border: 1px solid rgba(0,86,179,0.15);
       border-radius: 16px;
-      padding: 12px; /* Giảm nhẹ để bảng gọn gàng hơn khi thêm 2 lớp mới */
-      width: 260px;
+      padding: 12px;
+      width: 280px;
       backdrop-filter: blur(24px);
       box-shadow: 0 8px 32px rgba(0,40,100,0.12), 0 2px 8px rgba(0,0,0,0.06);
     }
@@ -177,6 +177,9 @@
 
     .layer-btn.l6 .dot { background: #00E5FF; box-shadow: 0 0 8px rgba(0,229,255,0.5); }
     .layer-btn.l6.active { background: rgba(0,229,255,0.07); border-color: rgba(0,229,255,0.3); }
+
+    .layer-btn.l7 .dot { background: #FFD700; box-shadow: 0 0 8px rgba(255,215,0,0.5); }
+    .layer-btn.l7.active { background: rgba(255,215,0,0.07); border-color: rgba(255,215,0,0.35); }
 
     .dot {
       width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
@@ -395,7 +398,7 @@
     @media (max-width: 768px) {
       #header { padding: 10px 14px; }
       .header-stats { display: none; }
-      #layer-panel { width: 220px; }
+      #layer-panel { width: 240px; }
       .leaflet-popup-content { width: 280px !important; }
     }
 
@@ -531,6 +534,8 @@
       <div class="stat-item"><div class="num" id="stat-comp">11</div><div class="lbl">ĐT Toàn Diện</div></div>
       <div class="stat-item"><div class="num" id="stat-strat">29</div><div class="lbl">ĐT Chiến Lược</div></div>
       <div class="stat-item"><div class="num" id="stat-vt">12</div><div class="lbl">Thị trường VT</div></div>
+      <div class="stat-item"><div class="num" id="stat-export">405 tỷ</div><div class="lbl">Xuất khẩu</div></div>
+      <div class="stat-item"><div class="num" id="stat-import">370 tỷ</div><div class="lbl">Nhập khẩu</div></div>
     </div>
     <div class="header-time">
       <div id="live-time">--:--:--</div>
@@ -583,6 +588,13 @@
         <span class="dot"></span>
         <span class="layer-label">Logistics & Kết nối</span>
         <span class="layer-badge">L6</span>
+        <span class="toggle-icon">●</span>
+      </button>
+
+      <button class="layer-btn l7 active" id="btn-l7" onclick="toggleLayer(7)">
+        <span class="dot"></span>
+        <span class="layer-label">Xuất khẩu & Nhập khẩu</span>
+        <span class="layer-badge">L7</span>
         <span class="toggle-icon">●</span>
       </button>
 
