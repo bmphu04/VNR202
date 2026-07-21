@@ -143,6 +143,79 @@ const DATA_2026 = {
     ]
   },
 
+  // ────────────────────────────────────────────────────────────
+  // LỚP 7: XUẤT KHẨU & NHẬP KHẨU
+  // ────────────────────────────────────────────────────────────
+  EXPORT_IMPORT: {
+    // Top đối tác thương mại (tổng kim ngạch xuất nhập khẩu 2024-2025)
+    // Màu xanh lá: xuất khẩu (VN bán ra), Màu cam: nhập khẩu (VN mua vào)
+    exports: [
+      // Top 5 thị trường xuất khẩu lớn nhất
+      { name: "United States of America", lat: 37.8, lng: -96.0, value: 119.5,  label: "119.5 tỷ USD", icon: "🇺🇸", products: "Điện thoại, máy tính, dệt may, giày dép, gỗ nội thất", year: 2024 },
+      { name: "China",                   lat: 35.0, lng: 104.0, value: 61.6,   label: "61.6 tỷ USD", icon: "🇨🇳", products: "Máy tính, điện tử, vải, nguyên phụ liệu dệt may", year: 2024 },
+      { name: "Japan",                   lat: 35.7, lng: 139.7, value: 23.8,   label: "23.8 tỷ USD", icon: "🇯🇵", products: "Máy móc, thiết bị, linh kiện điện tử, ô tô", year: 2024 },
+      { name: "South Korea",             lat: 37.5, lng: 127.0, value: 22.8,   label: "22.8 tỷ USD", icon: "🇰🇷", products: "Điện thoại, máy tính, linh kiện điện tử, thép", year: 2024 },
+      { name: "Germany",                 lat: 51.2, lng:  10.5, value: 8.5,   label: "8.5 tỷ USD",  icon: "🇩🇪", products: "Máy móc, dệt may cao cấp, giày dép thể thao", year: 2024 },
+      { name: "Netherlands",             lat: 52.3, lng:   4.7, value: 7.8,   label: "7.8 tỷ USD",  icon: "🇳🇱", products: "Máy tính, điện tử, nội thất, thực phẩm", year: 2024 },
+      { name: "Australia",               lat:-25.3, lng: 133.8, value: 7.2,   label: "7.2 tỷ USD",  icon: "🇦🇺", products: "Gạo, thủy sản, cà phê, cao su", year: 2024 },
+      { name: "United Kingdom",           lat: 51.5, lng:  -1.5, value: 6.8,   label: "6.8 tỷ USD",  icon: "🇬🇧", products: "Dệt may, giày dép, thủy sản, máy tính", year: 2024 },
+      { name: "France",                  lat: 46.2, lng:   2.2, value: 4.8,   label: "4.8 tỷ USD",  icon: "🇫🇷", products: "Thực phẩm chế biến, dệt may, nội thất", year: 2024 },
+      { name: "Thailand",                lat: 15.0, lng: 101.0, value: 4.5,   label: "4.5 tỷ USD",  icon: "🇹🇭", products: "Thủy sản, gạo, cà phê, rau quả", year: 2024 },
+      { name: "Canada",                  lat: 56.1, lng:-106.3, value: 4.2,   label: "4.2 tỷ USD",  icon: "🇨🇦", products: "Thủy sản, gỗ, nội thất, cà phê", year: 2024 },
+      { name: "Taiwan",                  lat: 25.0, lng: 121.5, value: 4.1,   label: "4.1 tỷ USD",  icon: "🇹🇼", products: "Máy tính, linh kiện điện tử, dệt may", year: 2024 },
+      { name: "India",                   lat: 22.0, lng:  78.0, value: 4.0,   label: "4.0 tỷ USD",  icon: "🇮🇳", products: "Cà phê, gạo, cao su, thủy sản", year: 2024 },
+      { name: "Indonesia",               lat: -2.5, lng: 118.0, value: 3.8,   label: "3.8 tỷ USD",  icon: "🇮🇩", products: "Máy tính, dệt may, thủy sản", year: 2024 },
+      { name: "Malaysia",               lat:  4.2, lng: 109.0, value: 3.5,   label: "3.5 tỷ USD",  icon: "🇲🇾", products: "Dầu khí, hóa chất, linh kiện điện tử", year: 2024 },
+    ],
+    imports: [
+      // Top 5 thị trường nhập khẩu lớn nhất
+      { name: "China",                   lat: 35.0, lng: 104.0, value: 148.5, label: "148.5 tỷ USD", icon: "🇨🇳", products: "Máy móc, thiết bị, linh kiện điện tử, vải, hóa chất, sắt thép", year: 2024 },
+      { name: "South Korea",             lat: 37.5, lng: 127.0, value: 56.2,  label: "56.2 tỷ USD",  icon: "🇰🇷", products: "Máy móc, thiết bị, linh kiện điện tử, sắt thép, hóa chất", year: 2024 },
+      { name: "Japan",                   lat: 35.7, lng: 139.7, value: 21.5,  label: "21.5 tỷ USD",  icon: "🇯🇵", products: "Máy móc, thiết bị, linh kiện điện tử, ô tô phụ tùng", year: 2024 },
+      { name: "Taiwan",                  lat: 25.0, lng: 121.5, value: 19.8,  label: "19.8 tỷ USD",  icon: "🇹🇼", products: "Chip bán dẫn, linh kiện điện tử, máy móc", year: 2024 },
+      { name: "Thailand",                lat: 15.0, lng: 101.0, value: 12.5,  label: "12.5 tỷ USD",  icon: "🇹🇭", products: "Ô tô, linh kiện, hóa chất, nhiên liệu", year: 2024 },
+      { name: "United States of America", lat: 37.8, lng: -96.0, value: 12.1, label: "12.1 tỷ USD",  icon: "🇺🇸", products: "Máy móc, thiết bị, chip bán dẫn, bông, đậu nành", year: 2024 },
+      { name: "Singapore",               lat:  1.35,lng: 103.8, value: 10.2,  label: "10.2 tỷ USD",  icon: "🇸🇬", products: "Dầu mỏ, hóa chất, linh kiện điện tử", year: 2024 },
+      { name: "Malaysia",               lat:  4.2, lng: 109.0, value:  9.8,  label: "9.8 tỷ USD",   icon: "🇲🇾", products: "Máy móc, linh kiện điện tử, dầu mỏ, hóa chất", year: 2024 },
+      { name: "India",                   lat: 22.0, lng:  78.0, value:  8.5,  label: "8.5 tỷ USD",   icon: "🇮🇳", products: "Bông, thuốc nhuộm, hóa chất, sắt thép", year: 2024 },
+      { name: "Germany",                 lat: 51.2, lng:  10.5, value:  8.0,  label: "8.0 tỷ USD",   icon: "🇩🇪", products: "Máy móc, thiết bị công nghiệp, ô tô", year: 2024 },
+      { name: "Australia",               lat:-25.3, lng: 133.8, value:  7.5,  label: "7.5 tỷ USD",   icon: "🇦🇺", products: "Sắt thép, than đá, bông, lương thực", year: 2024 },
+      { name: "Indonesia",               lat: -2.5, lng: 118.0, value:  7.2,  label: "7.2 tỷ USD",   icon: "🇮🇩", products: "Than, dầu mỏ, gỗ, bột giấy", year: 2024 },
+      { name: "Russia",                  lat: 61.5, lng: 105.3, value:  6.8,  label: "6.8 tỷ USD",   icon: "🇷🇺", products: "Dầu mỏ, khí đốt, phân bón, sắt thép", year: 2024 },
+      { name: "France",                 lat: 46.2, lng:   2.2, value:  5.2,  label: "5.2 tỷ USD",   icon: "🇫🇷", products: "Máy móc, thiết bị, dược phẩm, rượu vang", year: 2024 },
+      { name: "United Kingdom",         lat: 51.5, lng:  -1.5, value:  4.5,  label: "4.5 tỷ USD",   icon: "🇬🇧", products: "Máy móc, dược phẩm, sản phẩm tài chính", year: 2024 },
+    ],
+    // Sản phẩm xuất khẩu tiêu biểu
+    top_export_products: [
+      { name: "Điện thoại & linh kiện",   value: "~65 tỷ USD", icon: "📱", share: "28%" },
+      { name: "Máy tính & linh kiện",     value: "~25 tỷ USD", icon: "💻", share: "11%" },
+      { name: "Dệt may & giày dép",        value: "~44 tỷ USD", icon: "👕", share: "19%" },
+      { name: "Thủy sản & hải sản",       value: "~9.5 tỷ USD", icon: "🦐", share: "4%" },
+      { name: "Gạo & nông sản",           value: "~5 tỷ USD",  icon: "🍚", share: "2%" },
+      { name: "Cà phê",                   value: "~4 tỷ USD",  icon: "☕", share: "2%" },
+      { name: "Cao su",                   value: "~3.3 tỷ USD", icon: "🛞", share: "1.4%" },
+      { name: "Dầu mỏ & nhiên liệu",     value: "~8 tỷ USD",  icon: "⛽", share: "3.5%" },
+      { name: "Máy móc & thiết bị",       value: "~15 tỷ USD", icon: "⚙️", share: "6.5%" },
+    ],
+    // Sản phẩm nhập khẩu tiêu biểu
+    top_import_products: [
+      { name: "Máy móc & thiết bị",       value: "~65 tỷ USD", icon: "⚙️", share: "26%" },
+      { name: "Chip bán dẫn & điện tử",   value: "~45 tỷ USD", icon: "🔌", share: "18%" },
+      { name: "Vải & nguyên phụ liệu",     value: "~18 tỷ USD", icon: "🧵", share: "7%" },
+      { name: "Sắt thép & kim loại",       value: "~15 tỷ USD", icon: "🔩", share: "6%" },
+      { name: "Dầu mỏ & nhiên liệu",       value: "~20 tỷ USD", icon: "🛢️", share: "8%" },
+      { name: "Hóa chất & phân bón",       value: "~14 tỷ USD", icon: "🧪", share: "5.5%" },
+      { name: "Bông & sợi",                value: "~5 tỷ USD",  icon: "🌿", share: "2%" },
+      { name: "Ô tô & phụ tùng",           value: "~8 tỷ USD",  icon: "🚗", share: "3%" },
+    ],
+    stats: {
+      total_export: 405,    // tỷ USD 2024
+      total_import: 370,    // tỷ USD 2024
+      trade_surplus: 35,    // tỷ USD
+      num_partners: 224,     // số quốc gia/vùng lãnh thổ có quan hệ TM
+    }
+  },
+
   STATS: {
     countries: 193,
     comprehensive: 11,
@@ -280,6 +353,54 @@ const DATA_1986 = {
     ]
   },
 
+  // ────────────────────────────────────────────────────────────
+  // LỚP 7: XUẤT KHẨU & NHẬP KHẨU (1986)
+  // ────────────────────────────────────────────────────────────
+  EXPORT_IMPORT: {
+    exports: [
+      // 1986: VN xuất khẩu rất hạn chế, chủ yếu nông sản thô cho khối XHCN
+      { name: "Russia",       lat: 61.5, lng: 105.3, value: 0.08, label: "~80 triệu USD", icon: "🇷🇺", products: "Nông sản thô, thủy sản đánh bắt, gỗ rừng", year: 1986 },
+      { name: "Cuba",         lat: 21.5, lng: -79.5, value: 0.02, label: "~20 triệu USD", icon: "🇨🇺", products: "Gạo, nông sản, thủy sản", year: 1986 },
+      { name: "Laos",         lat: 18.0, lng: 102.5, value: 0.01, label: "~10 triệu USD", icon: "🇱🇦", products: "Hàng hóa cơ bản, nông sản", year: 1986 },
+      { name: "Cambodia",     lat: 11.6, lng: 104.9, value: 0.01, label: "~10 triệu USD", icon: "🇰🇭", products: "Hàng hóa cơ bản, nông sản", year: 1986 },
+      { name: "India",        lat: 22.0, lng:  78.0, value: 0.01, label: "~10 triệu USD", icon: "🇮🇳", products: "Thủy sản, hàng thủ công mỹ nghệ", year: 1986 },
+      { name: "France",       lat: 46.2, lng:   2.2, value: 0.01, label: "~10 triệu USD", icon: "🇫🇷", products: "Hàng thủ công mỹ nghệ, trà, cà phê", year: 1986 },
+      { name: "Hong Kong",    lat: 22.3, lng: 114.2, value: 0.02, label: "~20 triệu USD", icon: "🇭🇰", products: "Thủy sản, hàng thủ công, cà phê", year: 1986 },
+    ],
+    imports: [
+      // 1986: VN nhập khẩu chủ yếu từ Liên Xô và khối XHCN
+      { name: "Russia",       lat: 61.5, lng: 105.3, value: 1.2,  label: "~1.2 tỷ USD",  icon: "🇷🇺", products: "Dầu mỏ, máy móc, thiết bị công nghiệp, lương thực viện trợ", year: 1986 },
+      { name: "Poland",        lat: 51.9, lng:  19.1, value: 0.2,  label: "~200 triệu USD", icon: "🇵🇱", products: "Máy móc, thiết bị công nghiệp", year: 1986 },
+      { name: "Czech Republic", lat: 49.8, lng: 15.5, value: 0.15, label: "~150 triệu USD", icon: "🇨🇿", products: "Máy móc, thiết bị quân sự", year: 1986 },
+      { name: "Hungary",       lat: 47.2, lng:  19.5, value: 0.1,  label: "~100 triệu USD", icon: "🇭🇺", products: "Máy móc, thiết bị", year: 1986 },
+      { name: "Bulgaria",     lat: 42.7, lng:  25.5, value: 0.08, label: "~80 triệu USD",  icon: "🇧🇬", products: "Máy móc, thiết bị công nghiệp", year: 1986 },
+      { name: "Cuba",         lat: 21.5, lng: -79.5, value: 0.05, label: "~50 triệu USD",  icon: "🇨🇺", products: "Đường, thực phẩm, y tế", year: 1986 },
+      { name: "China",        lat: 35.0, lng: 104.0, value: 0.1,  label: "~100 triệu USD", icon: "🇨🇳", products: "Hàng tiêu dùng, vật tư y tế (còn rất hạn chế)", year: 1986 },
+    ],
+    top_export_products: [
+      { name: "Thủy sản",      value: "~30 triệu USD", icon: "🦐", share: "~25%" },
+      { name: "Gạo",           value: "~20 triệu USD", icon: "🍚", share: "~17%" },
+      { name: "Cà phê",        value: "~15 triệu USD", icon: "☕", share: "~12%" },
+      { name: "Hàng thủ công", value: "~10 triệu USD", icon: "🎨", share: "~8%" },
+      { name: "Gỗ & sản phẩm gỗ", value: "~8 triệu USD", icon: "🪵", share: "~7%" },
+      { name: "Hạt tiêu & gia vị", value: "~5 triệu USD", icon: "🌶️", share: "~4%" },
+    ],
+    top_import_products: [
+      { name: "Dầu mỏ & nhiên liệu", value: "~600 triệu USD", icon: "🛢️", share: "~40%" },
+      { name: "Máy móc & thiết bị",  value: "~300 triệu USD", icon: "⚙️", share: "~20%" },
+      { name: "Lương thực viện trợ", value: "~200 triệu USD", icon: "🌾", share: "~13%" },
+      { name: "Vật tư y tế & thuốc", value: "~80 triệu USD",  icon: "💊", share: "~5%" },
+      { name: "Nguyên liệu công nghiệp", value: "~100 triệu USD", icon: "🧪", share: "~7%" },
+      { name: "Hàng tiêu dùng",     value: "~120 triệu USD", icon: "🛒", share: "~8%" },
+    ],
+    stats: {
+      total_export: 0.3,   // tỷ USD 1986
+      total_import: 1.5,    // tỷ USD 1986 (chủ yếu viện trợ và vay của LX)
+      trade_surplus: -1.2, // thâm hụt lớn, phụ thuộc viện trợ
+      num_partners: 12,    // chủ yếu khối XHCN
+    }
+  },
+
   STATS: {
     countries: 54,       // Chỉ ~54 nước có quan hệ chính thức
     comprehensive: 4,    // Quan hệ đặc biệt: LX, Lào, CPC, Cuba
@@ -300,6 +421,7 @@ let ECONOMIC     = DATA_2026.ECONOMIC;
 let CULTURAL     = DATA_2026.CULTURAL;
 let SPACE_SCIENCE = DATA_2026.SPACE_SCIENCE;
 let LOGISTICS     = DATA_2026.LOGISTICS;
+let EXPORT_IMPORT = DATA_2026.EXPORT_IMPORT;
 let CURRENT_STATS = DATA_2026.STATS;
 
 function setYear(year) {
@@ -311,6 +433,7 @@ function setYear(year) {
   CULTURAL      = d.CULTURAL;
   SPACE_SCIENCE = d.SPACE_SCIENCE;
   LOGISTICS     = d.LOGISTICS;
+  EXPORT_IMPORT = d.EXPORT_IMPORT;
   CURRENT_STATS = d.STATS;
 }
 
