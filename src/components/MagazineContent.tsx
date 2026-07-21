@@ -1,3 +1,12 @@
+import { useState } from 'react';
+
+export interface MediaItem {
+  type: 'image' | 'video';
+  url: string;
+  thumbnail?: string;
+  title: string;
+  caption: string;
+}
 
 export interface MilestoneData {
   year: string;
@@ -12,26 +21,46 @@ export interface MilestoneData {
     desc: string;
   }[];
   highlights: string[];
+  media: MediaItem[];
 }
 
 export const milestonesData: MilestoneData[] = [
-
   {
     year: "1975-1986",
     title: "ĐÊM TRƯỚC ĐỔI MỚI",
     subtitle: "Thực trạng khắc nghiệt & Những bước 'Phá rào' cam go",
     quote: "Giai đoạn này không chỉ có màu xám của gian khó, mà còn là bản anh hùng ca về sự dũng cảm: dũng cảm nhìn thẳng vào sự thật, dũng cảm từ bỏ những tư duy cũ kỹ để cứu lấy vận mệnh dân tộc. Đó chính là gốc rễ của tinh thần sáng tạo mà Gen Z cần kế thừa.",
-    description: "Đất nước vận hành theo mô hình kế hoạch hóa tập trung, quan liêu, bao cấp, phân phối bằng tem phiếu và hiện vật, không áp dụng đầy đủ quy luật kinh tế làm triệt tiêu động lực sản xuất. Với xuất phát điểm thấp, cộng thêm hậu quả nặng nề của 30 năm chiến tranh, các cuộc chiến đấu bảo vệ biên giới Tây Nam và phía Bắc, cùng chính sách bao vây cấm vận của Mỹ, nền kinh tế rơi vào kiệt quệ. Sản xuất đình đốn, lạm phát tăng vọt, không có tích lũy, đời sống nhân dân vô cùng khó khăn.",
+    description: "Đất nước vận hành theo mô hình kế hoạch hóa tập trung, quan liêu, bao cấp, phân phối bằng tem phiếu và hiện vật, không áp dụng đầy đủ quy luật kinh tế làm triệt tiêu động lực sản xuất. Với xuất phát điểm thấp, cộng thêm hậu quả nặng nề của 30 năm chiến tranh, các cuộc chiến đấu bảo vệ biên giới Tây Nam và phía Bắc, cùng chính sách bao vây cấm vận của Mỹ, nền kinh tế rơi vào kiệt quệ.",
     story: "Giữa cơn bão khủng hoảng, những sáng kiến 'xé rào' từ thực tiễn đã tạo ra đốm lửa hy vọng. Bắt đầu từ việc cho phép 'sản xuất bung ra' (1979), tiếp nối là sự ra đời của Chỉ thị 100 về khoán sản phẩm trong nông nghiệp và Quyết định 25-CP, 26-CP trao quyền tự chủ tài chính cho các xí nghiệp quốc doanh (1981). Cuộc đấu tranh từ bỏ cơ chế cũ hội tụ tại 'điểm chạm' lịch sử tháng 8/1986, khi Đảng dũng cảm thừa nhận nền kinh tế nhiều thành phần, chuyển đổi cơ cấu sản xuất tập trung vào Ba chương trình kinh tế lớn, chính thức mở đường cho công cuộc Đổi mới.",
     stats: [
-      { value: "774%", label: "Lạm phát kỷ lục", desc: "Lạm phát tăng vọt từ mức 300% (năm 1985) lên tới mức kỷ lục vào năm 1986, khiến đời sống cán bộ, nhân dân và lực lượng vũ trang lao đao." },
-      { value: "17 triệu tấn", label: "Sản lượng lương thực", desc: "Nhờ 'Làn gió mới' từ Chỉ thị 100 (1/1981), sản lượng lương thực tăng vọt từ 13,4 triệu tấn (1976-1980) lên 17 triệu tấn (1981-1985)." },
-      { value: "3 Chương trình", label: "Định hướng kinh tế trọng điểm", desc: "Quyết định tập trung vào Lương thực - thực phẩm, Hàng tiêu dùng và Hàng xuất khẩu, từ bỏ việc đầu tư nóng vội vào công nghiệp nặng." }
+      { value: "774%", label: "Lạm phát kỷ lục", desc: "Lạm phát tăng vọt từ mức 300% (năm 1985) lên tới mức kỷ lục vào năm 1986, khiến đời sống nhân dân vô cùng lao đao." },
+      { value: "17 triệu tấn", label: "Sản lượng lương thực", desc: "Nhờ 'Làn gió mới' từ Chỉ thị 100 (1/1981), sản lượng lương thực tăng vọt lên 17 triệu tấn (1981-1985)." },
+      { value: "3 Chương trình", label: "Định hướng kinh tế", desc: "Quyết định tập trung vào Lương thực - thực phẩm, Hàng tiêu dùng và Hàng xuất khẩu." }
     ],
     highlights: [
-      "Bước đột phá đầu tiên (8/1979): Hội nghị Trung ương 6 chủ trương khắc phục sai lầm, xóa trạm kiểm soát để người dân tự do trao đổi, cho phép 'sản xuất bung ra'.",
-      "Bước đột phá thứ hai (6/1985): Hội nghị Trung ương 8 quyết định xóa bỏ cơ chế bao cấp, lấy 'Giá - Lương - Tiền' làm khâu đột phá chuyển sang hạch toán kinh doanh XHCN.",
-      "Điểm chạm Đổi mới (8/1986): Hội nghị Bộ Chính trị thừa nhận nền kinh tế nhiều thành phần là tất yếu khách quan, phân biệt rõ quản lý hành chính nhà nước với quản lý kinh doanh."
+      "Bước đột phá đầu tiên (8/1979): Hội nghị Trung ương 6 chủ trương xóa trạm kiểm soát để tự do trao đổi, cho phép 'sản xuất bung ra'.",
+      "Bước đột phá thứ hai (6/1985): Hội nghị Trung ương 8 quyết định xóa bỏ cơ chế bao cấp, lấy 'Giá - Lương - Tiền' làm khâu đột phá.",
+      "Điểm chạm Đổi mới (8/1986): Hội nghị Bộ Chính trị thừa nhận nền kinh tế nhiều thành phần là tất yếu khách quan."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/Q5pC3g9Ff1U",
+        title: "Tư liệu: Thời bao cấp & Đại hội VI (1986)",
+        caption: "Thước phim lịch sử ghi lại bối cảnh thời kỳ bao cấp, tem phiếu và không khí sôi nổi tại Đại hội Đại biểu toàn quốc lần thứ VI."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+        title: "Cửa hàng mậu dịch thời bao cấp",
+        caption: "Hình ảnh người dân xếp hàng với sổ lương thực và tem phiếu mua nhu yếu phẩm tại cửa hàng mậu dịch quốc doanh."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1000&q=80",
+        title: "Đốm lửa 'xé rào' trong sản xuất",
+        caption: "Những mô hình khoán hộ thử nghiệm tự phát tại nông thôn miền Bắc trước khi Chỉ thị 100 ra đời."
+      }
     ]
   },
 
@@ -40,29 +69,37 @@ export const milestonesData: MilestoneData[] = [
     title: "HÁI QUẢ NGỌT ĐẦU TIÊN",
     subtitle: "Kỳ tích nông nghiệp & Sự cáo chung của chế độ tem phiếu",
     quote: "Giai đoạn xung quanh năm 1989 được coi là thời điểm 'hái quả ngọt' đầu tiên của công cuộc Đổi mới, khi những tư duy mới từ Đại hội VI (1986) bắt đầu đi vào cuộc sống và tạo ra những thay đổi mang tính bước ngoặt.",
-    description: "Năm 1989 đánh dấu sự chấm dứt hoàn toàn của biểu tượng thời bao cấp khi chế độ phân phối tem phiếu bị xóa bỏ. Sự chuyển đổi từ kinh tế hiện vật sang kinh tế hàng hóa nhiều thành phần đã khơi thông nguồn lực, giúp Việt Nam giải quyết bài toán sinh tồn của dân tộc, kiềm chế thành công 'con ngựa bất kham' lạm phát và phá vỡ thế bao vây, cô lập về đối ngoại.",
-    story: "Một trong những thay đổi chấn động nhất là sự lột xác thần kỳ của nông nghiệp Việt Nam nhờ chính sách 'Khoán 10'. Từ một quốc gia thiếu đói triền miên, cuối năm 1988 còn phải đối mặt với khoản thiếu hụt 45 vạn tấn gạo, thì chỉ sau một năm (1989), chúng ta đã đủ ăn, có dự trữ và lần đầu tiên vươn lên xuất khẩu gạo ra thế giới. Song song đó, tháng 9-1989, Việt Nam tuyên bố rút toàn bộ quân tình nguyện tại Campuchia về nước, hoàn thành nghĩa vụ quốc tế và tạo điều kiện thuận lợi bình thường hóa quan hệ quốc tế, mở ra cánh cửa hội nhập. Giữa bối cảnh khối XHCN rung chuyển, Hội nghị Trung ương 6 (3/1989) cũng đã kịp thời định hình 6 nguyên tắc 'vàng' để kiên định con đường Đổi mới.",
+    description: "Năm 1989 đánh dấu sự chấm dứt hoàn toàn của biểu tượng thời bao cấp khi chế độ phân phối tem phiếu bị xóa bỏ. Sự chuyển đổi từ kinh tế hiện vật sang kinh tế hàng hóa nhiều thành phần đã khơi thông nguồn lực, giúp Việt Nam giải quyết bài toán sinh tồn của dân tộc, kiềm chế lạm phát và phá vỡ thế bao vây cô lập.",
+    story: "Một trong những thay đổi chấn động nhất là sự lột xác thần kỳ của nông nghiệp Việt Nam nhờ chính sách 'Khoán 10'. Từ một quốc gia thiếu đói triền miên, cuối năm 1988 còn phải đối mặt với khoản thiếu hụt 45 vạn tấn gạo, thì chỉ sau một năm (1989), chúng ta đã đủ ăn, có dự trữ và lần đầu tiên vươn lên xuất khẩu gạo ra thế giới.",
     stats: [
-      { 
-        value: "15 năm", 
-        label: "Giao đất tự chủ", 
-        desc: "Tháng 4-1988, Bộ Chính trị ban hành Nghị quyết 10 (Khoán 10), giao quyền tự chủ, giao đất ổn định cho nông dân 15 năm và đảm bảo thu nhập từ 40% sản lượng khoán trở lên." 
-      },
-      { 
-        value: "67,1%", 
-        label: "Kiềm chế lạm phát", 
-        desc: "Từ mức lạm phát phi mã lên đến 774,7% (1986), thông qua giảm bội chi ngân sách và thắt chặt tiền tệ, lạm phát đã giảm mạnh xuống còn 67,1% vào năm 1991." 
-      },
-      { 
-        value: "Xuất khẩu gạo", 
-        label: "Cú sốc tích cực", 
-        desc: "Năm 1988 còn thiếu 45 vạn tấn gạo, nhưng đến năm 1989 Việt Nam đã tạo nên kỳ tích khi tự túc đủ lương thực và bắt đầu xuất khẩu gạo ra thế giới." 
-      }
+      { value: "15 năm", label: "Giao đất tự chủ", desc: "Nghị quyết 10 (Khoán 10) giao quyền tự chủ, giao đất ổn định cho nông dân 15 năm." },
+      { value: "67,1%", label: "Kiềm chế lạm phát", desc: "Từ mức lạm phát phi mã 774,7% (1986), lạm phát đã giảm mạnh xuống còn 67,1%." },
+      { value: "Xuất khẩu gạo", label: "Cú sốc tích cực", desc: "Năm 1988 thiếu 45 vạn tấn gạo, năm 1989 Việt Nam bắt đầu xuất khẩu gạo ra thế giới." }
     ],
     highlights: [
-      "Xóa bỏ hoàn toàn chế độ phân phối theo tem phiếu (cuối 1988), chuyển sang cơ chế một giá, chấm dứt cảnh xếp hàng mua nhu yếu phẩm và tình trạng bao cấp bù lỗ.",
-      "Rút toàn bộ quân tình nguyện khỏi Campuchia, thực hiện chính sách 'thêm bạn, bớt thù' nhằm ưu tiên môi trường hòa bình để phát triển kinh tế.",
-      "Hội nghị Trung ương 6 (3/1989) định hình 6 nguyên tắc Đổi mới và lần đầu tiên chính thức sử dụng khái niệm 'hệ thống chính trị'."
+      "Xóa bỏ hoàn toàn chế độ phân phối theo tem phiếu (cuối 1988), chuyển sang cơ chế một giá.",
+      "Rút toàn bộ quân tình nguyện khỏi Campuchia, thực hiện chính sách 'thêm bạn, bớt thù'.",
+      "Hội nghị Trung ương 6 (3/1989) định hình 6 nguyên tắc Đổi mới."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/3JZ_D3ELwOQ",
+        title: "Tư liệu: Chuyến gạo xuất khẩu đầu tiên 1989",
+        caption: "Phim tư liệu ghi lại thời khắc Việt Nam xuất khẩu thành công đợt gạo đầu tiên ra thị trường quốc tế."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+        title: "Kỳ tích lúa gạo Khoán 10",
+        caption: "Nông dân hân hoan thu hoạch lúa mùa bội thu sau khi được tự chủ trên thửa ruộng của mình."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=1000&q=80",
+        title: "Thị trường tự do xóa bỏ tem phiếu",
+        caption: "Cảnh trao đổi hàng hóa tấp nập tại thị trường tự do khi hàng tiêu dùng ngập tràn kệ hàng năm 1989."
+      }
     ]
   },
 
@@ -70,18 +107,38 @@ export const milestonesData: MilestoneData[] = [
     year: "1991-1995",
     title: "BẮT TAY MỞ CỬA HỘI NHẬP",
     subtitle: "Kỳ tích Ngoại giao & Kinh tế 'Cất cánh'",
-    quote: "Giai đoạn năm 1995 được coi là 'năm bản lề' rực rỡ, đánh dấu thời điểm Việt Nam chính thức phá vỡ hoàn toàn thế bị bao vây, cấm vận và bước vào kỷ nguyên hội nhập toàn cầu với những thành tựu kinh tế kinh ngạc.",
-    description: "Năm 1995 chứng kiến những bước đột phá ngoại giao chưa từng có khi Việt Nam chính thức bình thường hóa quan hệ ngoại giao với Hoa Kỳ (11/7/1995) và gia nhập ASEAN (28/7/1995). Sự kiện này đã mở ra chương mới, gỡ bỏ rào cản lớn nhất đối với việc hội nhập kinh tế toàn cầu, nâng tầm vị thế đất nước trên trường quốc tế.",
-    story: "Giai đoạn 1991-1995 là minh chứng sống động cho sức sống của nền kinh tế thị trường định hướng xã hội chủ nghĩa. Nền kinh tế đã cơ bản ra khỏi khủng hoảng, bắt đầu có tích lũy từ nội bộ, tạo tiền đề để Đại hội VIII (1996) quyết định chuyển đất nước sang thời kỳ đẩy mạnh công nghiệp hóa, hiện đại hóa. Bên cạnh đó, Hội nghị giữa nhiệm kỳ (1/1994) đánh dấu bước tiến về tư duy chính trị khi lần đầu tiên khẳng định chủ trương xây dựng Nhà nước pháp quyền của nhân dân, do nhân dân, vì nhân dân. Dù đạt nhiều thành tựu, Đảng vẫn bản lĩnh và tỉnh táo nhận diện 'bốn nguy cơ' để cảnh báo cho tiến trình phát triển tương lai.",
+    quote: "Giai đoạn năm 1995 được coi là 'năm bản lề' rực rỡ, đánh dấu thời điểm Việt Nam chính thức phá vỡ hoàn toàn thế bị bao vây, cấm vận và bước vào kỷ nguyên hội nhập toàn cầu.",
+    description: "Năm 1995 chứng kiến những bước đột phá ngoại giao chưa từng có khi Việt Nam chính thức bình thường hóa quan hệ ngoại giao với Hoa Kỳ (11/7/1995) và gia nhập ASEAN (28/7/1995). Sự kiện này đã mở ra chương mới, gỡ bỏ rào cản lớn nhất đối với việc hội nhập kinh tế toàn cầu.",
+    story: "Giai đoạn 1991-1995 là minh chứng sống động cho sức sống của nền kinh tế thị trường định hướng XHCN. Nền kinh tế đã cơ bản ra khỏi khủng hoảng, bắt đầu có tích lũy từ nội bộ, tạo tiền đề để Đại hội VIII (1996) quyết định chuyển đất nước sang thời kỳ đẩy mạnh công nghiệp hóa, hiện đại hóa.",
     stats: [
-      { value: "8,2%", label: "Tăng trưởng GDP", desc: "Tốc độ tăng trưởng GDP bình quân giai đoạn 1991-1995 đạt 8,2%, vượt xa mức kế hoạch đề ra là 5,5 - 6,5%." },
-      { value: "12,7%", label: "Khuất phục lạm phát", desc: "Lạm phát giảm mạnh từ mức 67,1% (năm 1991) xuống chỉ còn 12,7% vào năm 1995, giúp nền kinh tế ổn định và có tích lũy." },
-      { value: "4 Nguy cơ", label: "Nhận diện thách thức", desc: "Hội nghị giữa nhiệm kỳ (1/1994) đã chỉ rõ 4 nguy cơ: tụt hậu kinh tế, chệch hướng XHCN, tham nhũng/quan liêu và 'diễn biến hòa bình'." }
+      { value: "8,2%", label: "Tăng trưởng GDP", desc: "Tốc độ tăng trưởng GDP bình quân giai đoạn 1991-1995 đạt 8,2%, vượt kế hoạch đề ra." },
+      { value: "12,7%", label: "Khuất phục lạm phát", desc: "Lạm phát giảm mạnh xuống chỉ còn 12,7% vào năm 1995, giúp kinh tế ổn định." },
+      { value: "4 Nguy cơ", label: "Nhận diện thách thức", desc: "Hội nghị giữa nhiệm kỳ (1/1994) chỉ rõ 4 nguy cơ thách thức tiến trình phát triển." }
     ],
     highlights: [
-      "Bình thường hóa quan hệ ngoại giao với Hoa Kỳ (11/7/1995) và chính thức trở thành thành viên của ASEAN (28/7/1995).",
-      "Lần đầu tiên khẳng định chủ trương xây dựng Nhà nước pháp quyền của dân, do dân, vì dân tại Hội nghị đại biểu giữa nhiệm kỳ (1/1994).",
-      "Đại hội VIII (1996) khẳng định đất nước bước vào thời kỳ mới: Đẩy mạnh công nghiệp hóa, hiện đại hóa."
+      "Bình thường hóa quan hệ ngoại giao với Hoa Kỳ (11/7/1995) và chính thức gia nhập ASEAN (28/7/1995).",
+      "Khẳng định chủ trương xây dựng Nhà nước pháp quyền của dân, do dân, vì dân (1/1994).",
+      "Đại hội VIII (1996) khẳng định đất nước bước vào thời kỳ đẩy mạnh công nghiệp hóa, hiện đại hóa."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/L_LUpnjgPso",
+        title: "Tư liệu: Việt Nam gia nhập ASEAN & Bình thường hóa Việt-Mỹ 1995",
+        caption: "Những khoảnh khắc lịch sử đánh dấu mốc cất cánh ngoại giao của Việt Nam trong mùa hè năm 1995."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1000&q=80",
+        title: "Lễ bình thường hóa quan hệ Việt - Mỹ",
+        caption: "Hai quốc gia chính thức khép lại quá khứ, tuyên bố thiết lập quan hệ ngoại giao đầy đủ ngày 11/7/1995."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+        title: "Kéo cờ Việt Nam tại đại gia đình ASEAN",
+        caption: "Lễ thượng kỳ lá cờ đỏ sao vàng tại Trụ sở Ban thư ký ASEAN ở Jakarta, Indonesia (28/7/1995)."
+      }
     ]
   },
 
@@ -90,29 +147,37 @@ export const milestonesData: MilestoneData[] = [
     title: "VƯƠN MÌNH RA BIỂN LỚN",
     subtitle: "Gia nhập WTO thế giới & Khát vọng thịnh vượng",
     quote: "Năm 2007 không chỉ là hội nhập kinh tế, mà là thời điểm người Việt tự tin định vị mình trên bản đồ thịnh vượng của nhân loại, khẳng định vị thế một quốc gia đang trỗi dậy mạnh mẽ.",
-    description: "Giai đoạn 2007-2008 là một cột mốc lịch sử khi Việt Nam thực sự 'vươn mình ra biển lớn'. Tháng 1-2007, sau hơn 10 năm đàm phán, Việt Nam chính thức trở thành thành viên thứ 150 của Tổ chức Thương mại Thế giới (WTO), mở rộng quan hệ giao thương với 230 quốc gia và vùng lãnh thổ. Cùng với đó, Đảng ban hành Chiến lược biển Việt Nam, định hướng đưa nước ta trở thành quốc gia mạnh về biển, làm giàu từ đại dương. Năm 2008 ghi dấu nội lực quốc gia khi Việt Nam chính thức thoát khỏi nhóm nước nghèo, gia nhập nhóm các quốc gia có thu nhập trung bình.",
-    story: "Chuyển từ 'hội nhập' sang 'hòa nhập' toàn cầu, Hội nghị Trung ương 4 khóa X (2/2007) đã ban hành chủ trương lớn để nền kinh tế phát triển nhanh và bền vững khi Việt Nam là thành viên của WTO. Ngay trong năm 2007, nền kinh tế nhảy vọt: GDP tăng 8,48%, kim ngạch xuất khẩu tăng 21,5%, FDI đạt kỷ lục 20,3 tỷ USD, và tổ chức thành công Hội nghị APEC 14. Cũng tại Hội nghị Trung ương 4, Nghị quyết 09 về Chiến lược biển Việt Nam đến năm 2020 được ban hành, xác định biển là không gian sinh tồn và cửa ngõ giao lưu quốc tế. Bất chấp khủng hoảng tài chính thế giới (2008), Việt Nam vẫn duy trì tốc độ tăng trưởng GDP bình quân đạt 7%. Đồng thời, việc mở rộng địa giới Thủ đô Hà Nội (2008) cùng các nghị quyết về xây dựng giai cấp công nhân và đội ngũ trí thức đã củng cố vững chắc nội lực quốc gia.",
+    description: "Tháng 1-2007, sau hơn 10 năm đàm phán cam go, Việt Nam chính thức trở thành thành viên thứ 150 của Tổ chức Thương mại Thế giới (WTO), mở rộng quan hệ giao thương với 230 quốc gia và vùng lãnh thổ. Năm 2008 ghi dấu nội lực quốc gia khi Việt Nam chính thức thoát khỏi nhóm nước nghèo.",
+    story: "Ngay trong năm 2007, nền kinh tế nhảy vọt: GDP tăng 8,48%, kim ngạch xuất khẩu tăng 21,5%, FDI đạt kỷ lục 20,3 tỷ USD, và tổ chức thành công Hội nghị APEC 14 tại Hà Nội.",
     stats: [
-      { 
-        value: "230", 
-        label: "Quốc gia & Vùng lãnh thổ", 
-        desc: "Việc gia nhập WTO giúp Việt Nam mở rộng mạng lưới giao thương toàn cầu, với hai đối tác lớn nhất là Hoa Kỳ và Trung Quốc." 
-      },
-      { 
-        value: "53-55%", 
-        label: "Mục tiêu GDP kinh tế biển", 
-        desc: "Chiến lược biển phấn đấu đến năm 2020, kinh tế biển đóng góp khoảng 53 - 55% GDP và 55 - 60% kim ngạch xuất khẩu của cả nước." 
-      },
-      { 
-        value: "2008", 
-        label: "Thoát khỏi nước nghèo", 
-        desc: "Thu nhập bình quân đầu người đạt 1.047 USD, đưa Việt Nam chính thức ra khỏi tình trạng kém phát triển để gia nhập nhóm nước có thu nhập trung bình." 
-      }
+      { value: "230", label: "Quốc gia & Vùng lãnh thổ", desc: "Gia nhập WTO giúp Việt Nam mở rộng mạng lưới giao thương toàn cầu." },
+      { value: "53-55%", label: "Mục tiêu GDP biển", desc: "Nghị quyết 09 về Chiến lược biển Việt Nam đến năm 2020." },
+      { value: "2008", label: "Thoát khỏi nước nghèo", desc: "Thu nhập bình quân vượt 1.047 USD, chính thức gia nhập nhóm nước thu nhập trung bình." }
     ],
     highlights: [
-      "Hội nghị Trung ương 4 khóa X (2/2007): Ban hành chủ trương hội nhập WTO và Nghị quyết 09 về Chiến lược biển Việt Nam đến 2020.",
-      "Năm 2007: Trở thành thành viên thứ 150 của WTO, đón dòng vốn FDI kỷ lục và tổ chức thành công Hội nghị APEC 14.",
-      "Hội nghị Trung ương 6 & 7 khóa X (2008): Ban hành nghị quyết xây dựng giai cấp công nhân và đội ngũ trí thức, coi đây là 'nguyên khí quốc gia'."
+      "Hội nghị Trung ương 4 khóa X (2/2007): Ban hành chủ trương hội nhập WTO và Nghị quyết 09 về Chiến lược biển.",
+      "Năm 2007: Trở thành thành viên thứ 150 của WTO, đón dòng vốn FDI kỷ lục và tổ chức Hội nghị APEC 14.",
+      "Mở rộng địa giới Thủ đô Hà Nội năm 2008 và ban hành các nghị quyết về giai cấp công nhân và đội ngũ trí thức."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/2g811Eo7K8U",
+        title: "Tư liệu: Việt Nam kết nạp gia nhập WTO 2007",
+        caption: "Lễ ký kết văn kiện kết nạp Việt Nam vào Tổ chức Thương mại Thế giới tại Geneva, Thụy Sĩ."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1000&q=80",
+        title: "Gia nhập WTO thành viên thứ 150",
+        caption: "Phái đoàn Việt Nam vỗ tay ăn mừng sau quyết định thông qua của Đại hội đồng WTO."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80",
+        title: "Hội nghị Cấp cao APEC 14 tại Hà Nội",
+        caption: "Hình ảnh nguyên thủ 21 nền kinh tế APEC mặc áo dài truyền thống Việt Nam tại Trung tâm Hội nghị Quốc gia."
+      }
     ]
   },
 
@@ -121,29 +186,37 @@ export const milestonesData: MilestoneData[] = [
     title: "TẦM VÓC MỚI TRONG KỶ NGUYÊN SỐ",
     subtitle: "Chuyển đổi mô hình tăng trưởng & Khẳng định vị thế toàn cầu",
     quote: "Nếu thời bao cấp là cuộc chiến để đủ no, thì giai đoạn 2020 là cuộc dấn thân để vươn tầm trí tuệ. Việt Nam chưa bao giờ có được cơ đồ, tiềm lực, vị thế và uy tín quốc tế như ngày nay.",
-    description: "Năm 2020 đánh dấu sự kết thúc thành công Chiến lược phát triển kinh tế - xã hội 10 năm (2011-2020). Việt Nam đã có sự thay đổi về chất trong nội lực kinh tế, không còn dựa hoàn toàn vào khai thác tài nguyên và lao động giá rẻ, mà chuyển đổi mô hình tăng trưởng dựa trên năng suất, ứng dụng mạnh mẽ khoa học - công nghệ và kinh tế tri thức. Đồng thời, hệ thống chính trị được củng cố, kiên quyết đấu tranh phòng, chống tham nhũng, lãng phí để làm trong sạch đội ngũ cán bộ.",
-    story: "Trong vị thế đối ngoại, Việt Nam đã chuyển biến sâu sắc từ 'phá thế bao vây' sang 'chủ động hội nhập toàn diện', tích cực tham gia xây dựng nguyên tắc, chuẩn mực quốc tế trong các thể chế đa phương. Đỉnh cao là việc Việt Nam được bầu làm Ủy viên không thường trực Hội đồng Bảo an Liên hợp quốc nhiệm kỳ 2020-2021 với số phiếu 192/193. Về xã hội, Việt Nam trở thành điểm sáng của thế giới khi hoàn thành các mục tiêu phát triển Thiên niên kỷ của Liên Hợp Quốc, thiết lập mạng lưới an sinh xã hội vững chắc với phương châm 'Không để ai bị bỏ lại phía sau'.",
+    description: "Năm 2020 đánh dấu sự kết thúc thành công Chiến lược phát triển kinh tế - xã hội 10 năm (2011-2020). Việt Nam đã chuyển đổi mô hình tăng trưởng dựa trên năng suất, ứng dụng mạnh mẽ khoa học - công nghệ và kinh tế tri thức.",
+    story: "Đỉnh cao ngoại giao là việc Việt Nam được bầu làm Ủy viên không thường trực Hội đồng Bảo an Liên hợp quốc nhiệm kỳ 2020-2021 với số phiếu kỷ lục 192/193. Đồng thời, Việt Nam trở thành điểm sáng thế giới về hoàn thành Mục tiêu phát triển Thiên niên kỷ.",
     stats: [
-      { 
-        value: "2.779 USD", 
-        label: "Thu nhập bình quân", 
-        desc: "Năm 2020, thu nhập bình quân đầu người đạt 2.779 USD, phản ánh sự cải thiện rõ rệt về chất lượng tăng trưởng và mức sống nhân dân." 
-      },
-      { 
-        value: "< 3%", 
-        label: "Kỳ tích giảm nghèo", 
-        desc: "Tỷ lệ hộ nghèo đa chiều giảm xuống còn dưới 3%, đồng thời tỷ lệ bao phủ bảo hiểm y tế đạt trên 90%." 
-      },
-      { 
-        value: "192/193", 
-        label: "Phiếu bầu tại LHQ", 
-        desc: "Ngày 7-6-2019, cộng đồng quốc tế tín nhiệm bầu Việt Nam làm Ủy viên không thường trực Hội đồng Bảo an LHQ nhiệm kỳ 2020-2021." 
-      }
+      { value: "2.779 USD", label: "Thu nhập bình quân", desc: "Năm 2020, thu nhập bình quân đầu người đạt 2.779 USD." },
+      { value: "< 3%", label: "Kỳ tích giảm nghèo", desc: "Tỷ lệ hộ nghèo đa chiều giảm xuống dưới 3%, bảo hiểm y tế đạt trên 90%." },
+      { value: "192/193", label: "Phiếu bầu tại LHQ", desc: "Tín nhiệm tuyệt đối của cộng đồng quốc tế bầu Việt Nam vào HĐBA Liên Hợp Quốc." }
     ],
     highlights: [
-      "Đại hội XII (2016) đẩy mạnh cơ cấu lại nền kinh tế, nâng cao năng suất lao động và sức cạnh tranh, gắn với hội nhập quốc tế toàn diện.",
-      "Hoàn thành xuất sắc Mục tiêu phát triển Thiên niên kỷ của Liên Hợp Quốc, đưa các chính sách xã hội, an sinh, dân tộc, tôn giáo phát triển mạnh mẽ.",
-      "Quyết liệt đẩy mạnh cuộc đấu tranh phòng, chống tham nhũng, lãng phí nhằm củng cố Nhà nước pháp quyền của dân, do dân, vì dân."
+      "Đại hội XII (2016) đẩy mạnh cơ cấu lại nền kinh tế gắn với hội nhập quốc tế toàn diện.",
+      "Hoàn thành xuất sắc Mục tiêu phát triển Thiên niên kỷ của Liên Hợp Quốc.",
+      "Quyết liệt đẩy mạnh cuộc đấu tranh phòng, chống tham nhũng, lãng phí."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/kXYiU_JCYtU",
+        title: "Tư liệu: Trúng cử HĐBA Liên Hợp Quốc 192/193 phiếu",
+        caption: "Khoảnh khắc đại sảnh Đại hội đồng LHQ vang dội tiếng vỗ tay chúc mừng chiến thắng kỷ lục của Việt Nam."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+        title: "Sứ mệnh Gìn giữ Hòa bình LHQ",
+        caption: "Lực lượng mũ nồi xanh Việt Nam lên đường tham gia sứ mệnh an ninh nhân đạo tại Nam Sudan."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
+        title: "Bứt phá hạ tầng công nghệ số",
+        caption: "Hệ thống viễn thông 4G/5G và nền tảng kinh tế số phủ sóng rộng khắp cả nước."
+      }
     ]
   },
 
@@ -152,29 +225,37 @@ export const milestonesData: MilestoneData[] = [
     title: "HÒA NHẬP TOÀN DIỆN & TIÊU CHUẨN QUỐC TẾ",
     subtitle: "Hiện thực hóa 'Khát vọng cường quốc' kỷ niệm 40 năm Đổi mới",
     quote: "Mốc năm 2026 không chỉ đơn thuần là kỷ niệm 40 năm Đổi mới mà còn là thời điểm Việt Nam chuyển mình mạnh mẽ từ 'hội nhập cơ bản' sang 'hòa nhập toàn diện và tiêu chuẩn hóa quốc tế'.",
-    description: "Đánh dấu bước đột phá về 'chất' để vươn tầm thế giới, năm 2026 là thời điểm Việt Nam áp dụng hàng loạt tiêu chuẩn toàn cầu về kinh tế, giáo dục và quản trị. Từ việc bắt buộc áp dụng IFRS, ESG trong kinh tế đến cuộc tái cấu trúc sâu sắc về tư duy an sinh xã hội, đất nước đang thiết lập một hệ sinh thái phát triển bền vững và hiện đại.",
-    story: "Nếu năm 1986 là bước đột phá 'phá rào' để cứu đói, thì năm 2026 là bước đột phá để nâng tầm vị thế. Việc áp dụng chuẩn mực báo cáo tài chính quốc tế (IFRS) và ESG trở thành 'giấy thông hành' để thị trường chứng khoán Việt Nam nâng hạng, đón dòng vốn tỷ USD. Song song đó, Luật Bảo hiểm xã hội mới (hiệu lực 2026) tạo ra cuộc tái cấu trúc sâu sắc về an sinh, thay thế tư duy 'bao cấp' bằng hệ thống đa tầng, giảm rào cản hưởng lương hưu xuống 15 năm và siết chặt rút BHXH một lần. Giáo dục và quản trị quốc gia cũng bước vào kỷ nguyên 4.0 với các tiêu chuẩn kiểm định đại học khắt khe (15 tiêu chuẩn, 60 tiêu chí) và sự phổ cập chuyển đổi số qua VNeID, đồng thời triển khai đồng bộ 8 chuẩn mực con người Việt Nam để thế hệ trẻ định hình bản sắc trong kỷ nguyên số.",
+    description: "Năm 2026 là thời điểm Việt Nam áp dụng hàng loạt tiêu chuẩn toàn cầu về kinh tế, giáo dục và quản trị. Từ việc bắt buộc áp dụng IFRS, ESG trong kinh tế đến cuộc tái cấu trúc sâu sắc về tư duy an sinh xã hội.",
+    story: "Việc áp dụng chuẩn mực báo cáo tài chính quốc tế (IFRS) và ESG trở thành 'giấy thông hành' để nâng hạng thị trường chứng khoán. Đồng thời, Luật Bảo hiểm xã hội mới tạo hệ thống đa tầng hiện đại và ứng dụng phổ cập VNeID.",
     stats: [
-      { 
-        value: "15 năm", 
-        label: "Đóng BHXH tối thiểu", 
-        desc: "Luật BHXH 2024 có hiệu lực giảm thời gian đóng tối thiểu từ 20 năm xuống 15 năm, mở rộng lưới an sinh cho hàng triệu lao động." 
-      },
-      { 
-        value: "IFRS & ESG", 
-        label: "Tiêu chuẩn toàn cầu", 
-        desc: "Bắt buộc áp dụng IFRS và tiêu chuẩn Môi trường - Xã hội - Quản trị (ESG) đối với doanh nghiệp niêm yết lớn để hướng tới nền kinh tế xanh." 
-      },
-      { 
-        value: "60 Tiêu chí", 
-        label: "Kiểm định thực chất", 
-        desc: "Từ 15/5/2026, các cơ sở giáo dục đại học được kiểm định theo 15 tiêu chuẩn và 60 tiêu chí mới, chuyển hẳn sang đánh giá thực chất vận hành." 
-      }
+      { value: "15 năm", label: "Đóng BHXH tối thiểu", desc: "Luật BHXH giảm thời gian đóng tối thiểu từ 20 năm xuống 15 năm." },
+      { value: "IFRS & ESG", label: "Tiêu chuẩn toàn cầu", desc: "Bắt buộc áp dụng IFRS và ESG hướng tới nền kinh tế xanh." },
+      { value: "60 Tiêu chí", label: "Kiểm định đại học", desc: "Kiểm định thực chất các cơ sở đại học theo 15 tiêu chuẩn và 60 tiêu chí mới." }
     ],
     highlights: [
-      "Hiện thực hóa 'Khát vọng cường quốc': Áp dụng IFRS và ESG để nâng cao năng lực cạnh tranh, tạo điều kiện nâng hạng thị trường chứng khoán.",
-      "Tái cấu trúc sâu sắc an sinh xã hội: Luật BHXH mới có hiệu lực, bảo đảm thu nhập ổn định khi về già, điều chỉnh lương và trợ cấp từ tháng 7/2026.",
-      "Quản trị quốc gia hiện đại: Đẩy mạnh chuyển đổi số (VNeID), chuẩn hóa giáo viên và tuyển sinh đại học, định hình văn hóa Gen Z."
+      "Hiện thực hóa 'Khát vọng cường quốc': Áp dụng IFRS và ESG để nâng cao năng lực cạnh tranh.",
+      "Tái cấu trúc sâu sắc an sinh xã hội: Luật BHXH mới có hiệu lực bảo đảm thu nhập cho người lao động.",
+      "Quản trị quốc gia hiện đại: Chuyển đổi số đồng bộ qua VNeID và định hình bản sắc Gen Z."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/ScMzIvxBSi4",
+        title: "Video: Tiêu chuẩn Quản trị & Kinh tế xanh 2026",
+        caption: "Tổng quan các chuẩn mực quốc tế IFRS, ESG và chuyển đổi số VNeID định hình Việt Nam 2026."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
+        title: "Kinh tế xanh & Tiêu chuẩn ESG",
+        caption: "Doanh nghiệp niêm yết chuyển đổi sang mô hình vận hành bền vững đạt chuẩn toàn cầu."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80",
+        title: "Hệ sinh thái số Gen Z",
+        caption: "Thế hệ trẻ làm chủ công nghệ AI và nền tảng số trong kỷ nguyên quản trị 4.0."
+      }
     ]
   },
 
@@ -183,21 +264,39 @@ export const milestonesData: MilestoneData[] = [
     title: "TỔNG KẾT 40 NĂM ĐỔI MỚI",
     subtitle: "Hành trình từ gian khó đến cơ đồ rực rỡ",
     quote: "Kỷ niệm 40 năm công cuộc Đổi mới, Việt Nam nhìn lại một 'pho lịch sử bằng vàng' với những bước nhảy vọt thần kỳ, khẳng định bản lĩnh của một dân tộc không bao giờ khuất phục trước gian khó. Đất nước ta chưa bao giờ có được cơ đồ và vị thế như ngày nay.",
-    description: "Từ xuất phát điểm là một nền kinh tế rơi vào khủng hoảng trầm trọng, lạm phát phi mã lên tới 774% vào năm 1986, thiếu đói và bị bao vây cô lập, Đảng và nhân dân ta đã dũng cảm nhìn thẳng vào sự thật. Quyết định Đổi mới toàn diện năm 1986, lấy 'dân làm gốc', đã mở ra một kỷ nguyên mới, giải phóng sức sản xuất to lớn và chuyển đổi thành công sang nền kinh tế thị trường định hướng xã hội chủ nghĩa.",
-    story: "Hành trình 40 năm là chuỗi những kỳ tích nối tiếp nhau: từ việc làm nên 'kỳ tích lúa gạo' năm 1989, chính thức vươn lên thành nước có thu nhập trung bình năm 2008, cho đến việc thu hút dòng vốn FDI hàng tỷ USD. Trên mặt trận ngoại giao, Việt Nam đã phá thế bao vây, bình thường hóa quan hệ với Hoa Kỳ, gia nhập ASEAN (1995), WTO (2007) và trở thành Ủy viên không thường trực HĐBA Liên hợp quốc với số phiếu kỷ lục. Năm 2026 đánh dấu kỷ nguyên của 'Chất', tiệm cận các chuẩn mực quản trị hiện đại toàn cầu như IFRS, ESG, cùng hệ thống an sinh đa tầng ưu việt. Website E-magazine này là nhịp cầu kết nối quá khứ gian khó với tương lai phồn vinh. Sứ mệnh của thế hệ Gen Z hôm nay là kế thừa tinh thần tự lực, tự cường, tận dụng Cách mạng 4.0 và AI để tiếp tục đưa Việt Nam trở thành quốc gia phát triển vào năm 2045.",
+    description: "Từ xuất phát điểm là một nền kinh tế rơi vào khủng hoảng trầm trọng năm 1986, Đảng và nhân dân ta đã dũng cảm Đổi mới toàn diện, giải phóng sức sản xuất to lớn và chuyển đổi thành công sang nền kinh tế thị trường định hướng xã hội chủ nghĩa.",
+    story: "Hành trình 40 năm là chuỗi kỳ tích: từ kỳ tích gạo 1989, gia nhập WTO 2007, đến ủy viên HĐBA LHQ và tiêu chuẩn hóa 2026. Sứ mệnh của thế hệ Gen Z hôm nay là kế thừa tinh thần tự lực tự cường để đưa Việt Nam trở thành quốc gia phát triển vào năm 2045.",
     stats: [
-      { value: "40 Năm", label: "Hành trình Đổi mới", desc: "Chuyển mình ngoạn mục từ một quốc gia thiếu đói, lạm phát phi mã thành nền kinh tế năng động, hội nhập sâu rộng." },
-      { value: "192/193", label: "Phiếu bầu kỷ lục", desc: "Sự tín nhiệm tuyệt đối của quốc tế khi Việt Nam được bầu làm Ủy viên không thường trực HĐBA Liên hợp quốc." },
-      { value: "2045", label: "Tầm nhìn phát triển", desc: "Nhiệm vụ của thế hệ trẻ: Đưa Việt Nam trở thành quốc gia phát triển, thu nhập cao nhân kỷ niệm 100 năm thành lập nước." }
+      { value: "40 Năm", label: "Hành trình Đổi mới", desc: "Chuyển mình ngoạn mục từ thiếu đói thành nền kinh tế năng động hội nhập sâu rộng." },
+      { value: "192/193", label: "Phiếu bầu kỷ lục", desc: "Sự tín nhiệm tuyệt đối của quốc tế với vị thế chính trị Việt Nam." },
+      { value: "2045", label: "Tầm nhìn phát triển", desc: "Đưa Việt Nam trở thành quốc gia phát triển, thu nhập cao vào dịp 100 năm thành lập nước." }
     ],
     highlights: [
-      "1986 - Dũng cảm nhìn vào sự thật: Xóa bỏ cơ chế bao cấp, thực hiện đổi mới toàn diện cứu đất nước khỏi khủng hoảng trầm trọng.",
-      "Kỳ tích kinh tế & Ngoại giao: Từ xuất khẩu gạo (1989), gia nhập WTO (2007) đến thiết lập quan hệ Đối tác Chiến lược/Toàn diện với các cường quốc.",
-      "Tiêu chuẩn hóa quốc tế 2026: Áp dụng chuẩn IFRS, ESG, giảm thời gian đóng BHXH xuống 15 năm và chuẩn hóa hệ thống giáo dục, công vụ."
+      "1986 - Dũng cảm nhìn vào sự thật: Xóa bao cấp, cứu đất nước khỏi khủng hoảng trầm trọng.",
+      "Kỳ tích kinh tế & Ngoại giao: Từ xuất khẩu gạo, gia nhập WTO đến thiết lập quan hệ đối tác toàn diện với các cường quốc.",
+      "Tiêu chuẩn hóa 2026 & Tầm nhìn 2045: Chuẩn hóa IFRS, ESG, giáo dục và định hình sức mạnh thế hệ trẻ."
+    ],
+    media: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/EngW7tLk60g",
+        title: "Phim tư liệu đặc biệt: 40 Năm Đổi Mới - Hành trình khát vọng",
+        caption: "Phim tư liệu toàn cảnh nhìn lại 40 năm tự lực tự cường và khát vọng bứt phá vươn mình của dân tộc."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1477959858617-67f30ac4ce78?auto=format&fit=crop&w=1000&q=80",
+        title: "Việt Nam rực rỡ sau 40 năm Đổi Mới",
+        caption: "Toàn cảnh đô thị hiện đại và sức sống phát triển sôi động của đất nước sau 4 thập kỷ."
+      },
+      {
+        type: "image",
+        url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80",
+        title: "Khát vọng Gen Z hướng tới 2045",
+        caption: "Thế hệ trẻ Việt Nam tự tin, năng động sẵn sàng đưa đất nước trở thành cường quốc phát triển."
+      }
     ]
   }
-
-
 ];
 
 interface MagazineContentProps {
@@ -216,7 +315,12 @@ export default function MagazineContent({
   isVisible
 }: MagazineContentProps) {
   const data = milestonesData[milestoneIndex];
+  const [activeMediaIndex, setActiveMediaIndex] = useState<number>(0);
+  const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
+
   if (!data) return null;
+
+  const currentMedia = data.media && data.media[activeMediaIndex] ? data.media[activeMediaIndex] : data.media?.[0];
 
   return (
     <div className={`magazine-container ${isVisible ? 'fade-in' : 'fade-out'}`}>
@@ -259,8 +363,63 @@ export default function MagazineContent({
             </div>
           </div>
 
-          {/* Right Column: Statistics Card & Graphics placeholder */}
+          {/* Right Column: Multimedia Showcase & Statistics Card */}
           <div className="magazine-col-right">
+
+            {/* Multimedia Showcase Box (Videos & Images) */}
+            {data.media && data.media.length > 0 && (
+              <div className="multimedia-card">
+                <div className="multimedia-header">
+                  <div className="multimedia-title">
+                    <span>🎬</span> Tư liệu Đa Phương Tiện
+                  </div>
+                  <div className="media-type-tabs">
+                    {data.media.map((item, idx) => (
+                      <button
+                        key={idx}
+                        className={`media-tab-btn ${activeMediaIndex === idx ? 'active' : ''}`}
+                        onClick={() => setActiveMediaIndex(idx)}
+                      >
+                        {item.type === 'video' ? '🎬 Video' : `🖼️ Ảnh ${idx}`}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {currentMedia && (
+                  <div className="media-content-display">
+                    {currentMedia.type === 'video' ? (
+                      <div className="media-video-frame">
+                        <iframe
+                          src={currentMedia.url}
+                          title={currentMedia.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className="media-image-frame"
+                        onClick={() => setLightboxOpen(true)}
+                        title="Click để phóng to ảnh"
+                      >
+                        <img src={currentMedia.url} alt={currentMedia.title} />
+                        <div className="media-zoom-overlay">
+                          <span>🔍 Phóng to ảnh tư liệu</span>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="media-caption-box">
+                      <div className="media-caption-title">{currentMedia.title}</div>
+                      <div className="media-caption-text">{currentMedia.caption}</div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Statistics Card */}
             <div className="stats-card">
               <h4 className="stats-card-title">Dữ liệu & Số liệu</h4>
               <div className="stats-grid">
@@ -274,19 +433,6 @@ export default function MagazineContent({
               </div>
             </div>
 
-            {/* Stylized Historical Card */}
-            <div className="vintage-visual-card">
-              <div className="visual-glow-circle"></div>
-              <div className="visual-card-content">
-                <span className="visual-tag">Tài liệu lịch sử</span>
-                <h5>Tạp chí Số Đa Phương Tiện</h5>
-                <p>Khám phá tiến trình Đổi Mới kinh tế qua các thời kỳ.</p>
-                <div className="visual-line-art">
-                  <div className="line-art-dot"></div>
-                  <div className="line-art-path"></div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -304,6 +450,28 @@ export default function MagazineContent({
         </footer>
 
       </div>
+
+      {/* Lightbox Modal for Full-Screen Image Viewing */}
+      {lightboxOpen && currentMedia && currentMedia.type === 'image' && (
+        <div className="lightbox-modal" onClick={() => setLightboxOpen(false)}>
+          <div className="lightbox-content" onClick={e => e.stopPropagation()}>
+            <button className="lightbox-close-btn" onClick={() => setLightboxOpen(false)} aria-label="Đóng">
+              &times;
+            </button>
+            <div className="lightbox-body">
+              <div className="lightbox-media-container">
+                <img src={currentMedia.url} alt={currentMedia.title} />
+              </div>
+              <div className="lightbox-info">
+                <div className="lightbox-year-badge">{data.year}</div>
+                <h3 className="lightbox-title">{currentMedia.title}</h3>
+                <p className="lightbox-caption">{currentMedia.caption}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
