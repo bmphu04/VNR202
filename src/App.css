@@ -28,6 +28,8 @@ body {
   background-color: var(--color-bg-dark);
   color: var(--color-text-light);
   font-family: var(--font-sans);
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
   overflow: hidden;
   width: 100vw;
   height: 100vh;
@@ -297,7 +299,7 @@ img {
 
 .timeline-canvas {
   position: absolute;
-  width: 2000px;
+  width: 2400px;
   height: 1000px;
   transform-origin: 0 0;
 }
@@ -407,7 +409,8 @@ img {
   font-size: 24px;
   font-weight: 700;
   fill: var(--color-gold);
-  font-feature-settings: "lnum";
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
 }
 
 .node-label-text {
@@ -466,7 +469,8 @@ img {
   pointer-events: none;
   user-select: none;
   line-height: 1;
-  font-feature-settings: "lnum";
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
   z-index: 1;
 }
 
@@ -506,6 +510,8 @@ img {
   padding: 2px 14px;
   border-radius: 4px;
   margin-bottom: 12px;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
 }
 
 .magazine-title {
@@ -658,6 +664,8 @@ img {
   color: var(--color-gold);
   line-height: 1;
   word-break: break-word;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
 }
 
 .stat-label {
