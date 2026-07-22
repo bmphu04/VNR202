@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import img86_1 from '../assets/86.1.jpg';
+import img86_2 from '../assets/86.2.jpg';
+import img95_1 from '../assets/95.1.jpg';
+import img95_2 from '../assets/95.2.jpg';
+import img95_3 from '../assets/95.3.jpg';
+import img07_1 from '../assets/1784633975641_183231507058871077_g6777374503551308705_d14eb3522f27ce7caecf12b6f7d96563.jpg';
 
 export interface MediaItem {
   type: 'image' | 'video';
@@ -45,19 +51,19 @@ export const milestonesData: MilestoneData[] = [
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/Q5pC3g9Ff1U",
+        url: "https://www.youtube.com/embed/fh-wkkbXsTE",
         title: "Tư liệu: Thời bao cấp & Đại hội VI (1986)",
         caption: "Thước phim lịch sử ghi lại bối cảnh thời kỳ bao cấp, tem phiếu và không khí sôi nổi tại Đại hội Đại biểu toàn quốc lần thứ VI."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+        url: img86_1,
         title: "Cửa hàng mậu dịch thời bao cấp",
         caption: "Hình ảnh người dân xếp hàng với sổ lương thực và tem phiếu mua nhu yếu phẩm tại cửa hàng mậu dịch quốc doanh."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1000&q=80",
+        url: img86_2,
         title: "Đốm lửa 'xé rào' trong sản xuất",
         caption: "Những mô hình khoán hộ thử nghiệm tự phát tại nông thôn miền Bắc trước khi Chỉ thị 100 ra đời."
       }
@@ -122,22 +128,22 @@ export const milestonesData: MilestoneData[] = [
     ],
     media: [
       {
-        type: "video",
-        url: "https://www.youtube.com/embed/L_LUpnjgPso",
-        title: "Tư liệu: Việt Nam gia nhập ASEAN & Bình thường hóa Việt-Mỹ 1995",
-        caption: "Những khoảnh khắc lịch sử đánh dấu mốc cất cánh ngoại giao của Việt Nam trong mùa hè năm 1995."
+        type: "image",
+        url: img95_1,
+        title: "Bình thường hóa quan hệ Việt - Mỹ",
+        caption: "Lễ tuyên bố thiết lập quan hệ ngoại giao đầy đủ giữa Việt Nam và Hoa Kỳ ngày 11/7/1995."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1000&q=80",
-        title: "Lễ bình thường hóa quan hệ Việt - Mỹ",
-        caption: "Hai quốc gia chính thức khép lại quá khứ, tuyên bố thiết lập quan hệ ngoại giao đầy đủ ngày 11/7/1995."
+        url: img95_2,
+        title: "Gia nhập ASEAN",
+        caption: "Lễ thượng kỳ lá cờ đỏ sao vàng, chính thức kết nạp Việt Nam làm thành viên thứ 7 của ASEAN (28/7/1995)."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
-        title: "Kéo cờ Việt Nam tại đại gia đình ASEAN",
-        caption: "Lễ thượng kỳ lá cờ đỏ sao vàng tại Trụ sở Ban thư ký ASEAN ở Jakarta, Indonesia (28/7/1995)."
+        url: img95_3,
+        title: "Ký kết Hiệp định khung Việt Nam - EU",
+        caption: "Việt Nam và Liên minh châu Âu ký kết Hiệp định hợp tác khung năm 1995, mở ra chương mới trong quan hệ hai bên."
       }
     ]
   },
@@ -162,21 +168,15 @@ export const milestonesData: MilestoneData[] = [
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/2g811Eo7K8U",
-        title: "Tư liệu: Việt Nam kết nạp gia nhập WTO 2007",
-        caption: "Lễ ký kết văn kiện kết nạp Việt Nam vào Tổ chức Thương mại Thế giới tại Geneva, Thụy Sĩ."
+        url: "https://www.youtube.com/embed/b7TM3sXk1_8?start=63",
+        title: "Phim tư liệu: Lễ gia nhập Tổ chức Thương mại Thế giới WTO (2007)",
+        caption: "Thước phim lịch sử ghi lại thời khắc Việt Nam chính thức ký kết và trao văn kiện gia nhập WTO tại Geneva."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1000&q=80",
-        title: "Gia nhập WTO thành viên thứ 150",
-        caption: "Phái đoàn Việt Nam vỗ tay ăn mừng sau quyết định thông qua của Đại hội đồng WTO."
-      },
-      {
-        type: "image",
-        url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80",
-        title: "Hội nghị Cấp cao APEC 14 tại Hà Nội",
-        caption: "Hình ảnh nguyên thủ 21 nền kinh tế APEC mặc áo dài truyền thống Việt Nam tại Trung tâm Hội nghị Quốc gia."
+        url: img07_1,
+        title: "Lễ trao văn kiện gia nhập WTO tại Geneva",
+        caption: "Tổng Giám đốc WTO Pascal Lamy trao Nghị định thư gia nhập WTO cho Bộ trưởng Thương mại Trương Đình Tuyển và phái đoàn Việt Nam (Hình ảnh TTXVN)."
       }
     ]
   },
@@ -374,15 +374,20 @@ export default function MagazineContent({
                     <span>🎬</span> Tư liệu Đa Phương Tiện
                   </div>
                   <div className="media-type-tabs">
-                    {data.media.map((item, idx) => (
-                      <button
-                        key={idx}
-                        className={`media-tab-btn ${activeMediaIndex === idx ? 'active' : ''}`}
-                        onClick={() => setActiveMediaIndex(idx)}
-                      >
-                        {item.type === 'video' ? '🎬 Video' : `🖼️ Ảnh ${idx}`}
-                      </button>
-                    ))}
+                    {data.media.map((item, idx) => {
+                      const imgIdx = item.type === 'image' 
+                        ? data.media.filter((m, i) => m.type === 'image' && i <= idx).length 
+                        : 0;
+                      return (
+                        <button
+                          key={idx}
+                          className={`media-tab-btn ${activeMediaIndex === idx ? 'active' : ''}`}
+                          onClick={() => setActiveMediaIndex(idx)}
+                        >
+                          {item.type === 'video' ? '🎬 Video' : `🖼️ Ảnh ${imgIdx}`}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
