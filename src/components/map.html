@@ -529,6 +529,99 @@
     #year-overlay.flashing {
       background: rgba(255,255,255,0.7);
     }
+    
+    /* ===== FLOATING ACTION BUTTON & RESPONSIVE MAP OVERRIDES ===== */
+    #layer-toggle-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 1001;
+      background: var(--blue-navy);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+    #layer-toggle-btn:hover {
+      transform: scale(1.05);
+    }
+    
+    @media (max-width: 768px) {
+      /* Floating menu for Layer Panel */
+      #layer-panel {
+        transform: translateX(-120%);
+        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        top: 75px !important;
+        left: 15px !important;
+        z-index: 1000 !important;
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+      }
+      #layer-panel.open {
+        transform: translateX(0);
+      }
+      #layer-toggle-btn {
+        display: flex !important;
+      }
+      /* Legend Modal centered nicely */
+      #legend-modal {
+        left: 15px !important;
+        right: 15px !important;
+        width: auto !important;
+        top: 75px !important;
+        max-height: calc(100vh - 220px) !important;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .header-time {
+        display: none !important;
+      }
+      .brand-title h1 {
+        font-size: 0.95rem !important;
+      }
+      .brand-title span {
+        font-size: 0.52rem !important;
+        letter-spacing: 1px !important;
+      }
+      .brand-flag {
+        width: 38px !important;
+        height: 25px !important;
+      }
+      .brand-flag::after {
+        font-size: 14px !important;
+      }
+      .header-brand {
+        gap: 8px !important;
+        width: 100%;
+        justify-content: space-between;
+      }
+      #live-time {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .btn-back-map {
+        margin-left: 8px !important;
+        padding: 5px 10px !important;
+        font-size: 0.68rem !important;
+      }
+      #year-badge {
+        font-size: 2.8rem !important;
+      }
+      #year-badge.show {
+        font-size: 3.8rem !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -553,7 +646,7 @@
         <h1>VIỆT NAM – DẤU ẤN TOÀN CẦU</h1>
         <span>Interactive Global Influence Map • 2026</span>
       </div>
-      <a href="/" style="
+      <a href="/" class="btn-back-map" style="
         margin-left: 20px;
         background: rgba(200, 0, 10, 0.08);
         border: 1px solid rgba(200, 0, 10, 0.2);
@@ -587,6 +680,9 @@
 
   <!-- Map -->
   <div id="map-wrapper">
+    <!-- Mobile Layer toggle button -->
+    <button id="layer-toggle-btn" onclick="toggleLayerPanel()" aria-label="Hiện các lớp dữ liệu">⚙️</button>
+    
     <!-- Layer Panel -->
     <div id="layer-panel">
       <div class="panel-title">Lớp Dữ Liệu</div>
@@ -726,6 +822,21 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="data.js"></script>
 <script src="map.js"></script>
+<script>
+  function toggleLayerPanel() {
+    const panel = document.getElementById('layer-panel');
+    const btn = document.getElementById('layer-toggle-btn');
+    if (!panel || !btn) return;
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      btn.innerHTML = '✕';
+      btn.style.background = '#c8000a';
+    } else {
+      btn.innerHTML = '⚙️';
+      btn.style.background = 'var(--blue-navy)';
+    }
+  }
+</script>
 
 </body>
 </html>

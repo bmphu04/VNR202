@@ -1193,10 +1193,6 @@ img {
     position: relative;
     height: 420px;
   }
-  .timeline-canvas {
-    transform: scale(0.4) !important;
-    transform-origin: center center !important;
-  }
   .intro-title {
     font-size: 2.4rem;
   }
@@ -1270,9 +1266,6 @@ img {
   }
   .timeline-viewport {
     height: 360px;
-  }
-  .timeline-canvas {
-    transform: scale(0.32) !important;
   }
   .intro-overlay {
     top: 8%;
@@ -1352,9 +1345,6 @@ img {
   .timeline-viewport {
     height: 320px;
   }
-  .timeline-canvas {
-    transform: scale(0.27) !important;
-  }
   .intro-overlay {
     top: 6%;
     width: 92%;
@@ -1393,9 +1383,6 @@ img {
 @media (max-width: 420px) {
   .timeline-viewport {
     height: 280px;
-  }
-  .timeline-canvas {
-    transform: scale(0.22) !important;
   }
   .intro-title {
     font-size: 1.4rem;
@@ -1444,9 +1431,6 @@ img {
 @media (max-width: 360px) {
   .timeline-viewport {
     height: 240px;
-  }
-  .timeline-canvas {
-    transform: scale(0.18) !important;
   }
   .intro-title {
     font-size: 1.2rem;
