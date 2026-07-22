@@ -11,10 +11,10 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ===== RESET & BASE ===== */
+    /* ===== RESET & BASE (Original Clean Light Color Scheme) ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -33,7 +33,8 @@
       --amber:      #e65100;
       --text-main:  #1a2540;
       --text-muted: #5a6a88;
-      --font-main:  'Be Vietnam Pro', 'Inter', sans-serif; /* Sử dụng font chữ hỗ trợ tiếng Việt hoàn hảo */
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-main:  'Be Vietnam Pro', 'Inter', sans-serif;
       --font-mono:  'Space Mono', monospace;
     }
 
@@ -43,6 +44,8 @@
       font-family: var(--font-main);
       color: var(--text-main);
       overflow: hidden;
+      font-variant-numeric: lining-nums;
+      font-feature-settings: "lnum" 1, "onum" 0;
     }
 
     /* ===== LAYOUT ===== */
@@ -82,6 +85,7 @@
       font-size: 1.25rem; font-weight: 900;
       color: #da251d; /* Màu đỏ thuần */
       letter-spacing: 0.5px; line-height: 1;
+      font-variant-numeric: lining-nums;
     }
     .brand-title span {
       font-size: 0.65rem; color: var(--text-muted);
@@ -96,6 +100,7 @@
     .stat-item .num {
       font-size: 1.4rem; font-weight: 700; color: #0056B3;
       font-family: var(--font-mono);
+      font-variant-numeric: lining-nums;
     }
     .stat-item .lbl {
       font-size: 0.6rem; color: var(--text-muted);
@@ -122,7 +127,7 @@
       background: rgba(255,255,255,0.95);
       border: 1px solid rgba(0,86,179,0.15);
       border-radius: 16px;
-      padding: 12px; /* Giảm nhẹ để bảng gọn gàng hơn khi thêm 2 lớp mới */
+      padding: 12px;
       width: 260px;
       backdrop-filter: blur(24px);
       box-shadow: 0 8px 32px rgba(0,40,100,0.12), 0 2px 8px rgba(0,0,0,0.06);
@@ -141,11 +146,11 @@
 
     .layer-btn {
       display: flex; align-items: center; gap: 12px;
-      width: 100%; padding: 8px 10px; /* Thu hẹp padding */
+      width: 100%; padding: 8px 10px;
       border: 1px solid transparent;
       border-radius: 10px;
       background: transparent;
-      cursor: pointer; margin-bottom: 4px; /* Giảm margin giữa các nút */
+      cursor: pointer; margin-bottom: 4px;
       transition: all 0.25s ease;
       color: var(--text-main);
       font-family: var(--font-main);
@@ -177,6 +182,9 @@
 
     .layer-btn.l6 .dot { background: #00E5FF; box-shadow: 0 0 8px rgba(0,229,255,0.5); }
     .layer-btn.l6.active { background: rgba(0,229,255,0.07); border-color: rgba(0,229,255,0.3); }
+
+    .layer-btn.l7 .dot { background: #FFD700; box-shadow: 0 0 8px rgba(255,215,0,0.5); }
+    .layer-btn.l7.active { background: rgba(255,215,0,0.07); border-color: rgba(255,215,0,0.35); }
 
     .dot {
       width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
@@ -235,6 +243,7 @@
     .popup-name {
       font-size: 1.1rem; font-weight: 700; color: #1a2540;
       margin-bottom: 4px; line-height: 1.2;
+      font-variant-numeric: lining-nums;
     }
     .popup-rel {
       font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px;
@@ -274,7 +283,7 @@
     .event-year {
       font-family: var(--font-mono); font-size: 0.6rem; color: #c8000a;
       padding: 1px 6px; background: rgba(200,0,10,0.08); border-radius: 4px;
-      flex-shrink: 0; margin-top: 1px;
+      flex-shrink: 0; margin-top: 1px; font-variant-numeric: lining-nums;
     }
 
     /* ===== PULSE DOT MARKERS ===== */
@@ -326,12 +335,6 @@
     }
     .ticker-sep { color: #0056B3; margin: 0 12px; }
 
-    /* ===== VIETNAM GLOW EFFECT ===== */
-    @keyframes vnPulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.7; }
-    }
-
     /* ===== ZOOM CONTROLS OVERRIDE ===== */
     .leaflet-control-zoom {
       border: 1px solid var(--border) !important;
@@ -349,34 +352,56 @@
     /* ===== LOADING SCREEN ===== */
     #loading {
       position: fixed; inset: 0; z-index: 9999;
-      background: var(--bg-deep);
+      background: radial-gradient(circle at center, #23060a 0%, #0c0102 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 24px; transition: opacity 0.8s ease;
+      gap: 20px; transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .loading-brand-badge {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .loading-flag {
+      width: 36px; height: 24px;
+      background: #da251d;
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #ffcd00; font-size: 14px;
+      box-shadow: 0 0 12px rgba(218,37,29,0.6);
+      border: 1px solid rgba(229, 184, 66, 0.35);
+    }
+    .loading-subtitle {
+      font-size: 0.7rem; color: #e5b842;
+      text-transform: uppercase; letter-spacing: 4px; font-weight: 600;
     }
     .loading-logo {
-      font-size: 3rem; font-weight: 900;
-      background: linear-gradient(90deg, #c8000a, #d4880a, #0056B3);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem; font-weight: 900;
+      color: #fff; text-align: center;
+      letter-spacing: 1px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      background: linear-gradient(135deg, #ffffff 0%, #ffdf79 60%, #e5b842 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: logoPulse 1.5s ease-in-out infinite;
+      animation: logoPulse 2s ease-in-out infinite;
     }
     @keyframes logoPulse {
-      0%, 100% { filter: brightness(1); }
-      50%       { filter: brightness(1.4); }
+      0%, 100% { filter: brightness(1); transform: scale(1); }
+      50%       { filter: brightness(1.2); transform: scale(1.02); }
     }
     .loading-bar-wrap {
-      width: 280px; height: 3px; background: rgba(255,255,255,0.07);
+      width: 240px; height: 3px; background: rgba(229, 184, 66, 0.15);
       border-radius: 3px; overflow: hidden;
+      margin-top: 6px;
     }
     .loading-bar {
       height: 100%; border-radius: 3px;
-      background: linear-gradient(90deg, #FFD700, #FFA500);
-      animation: loadBar 2s ease-in-out forwards;
-      box-shadow: 0 0 12px #FFD700;
+      background: linear-gradient(90deg, #8f1d2b, #e5b842, #ffdf79);
+      animation: loadBar 0.9s ease-in-out forwards;
+      box-shadow: 0 0 12px #e5b842;
     }
     @keyframes loadBar { 0% { width: 0; } 100% { width: 100%; } }
     .loading-text {
-      font-size: 0.72rem; color: var(--text-muted);
+      font-size: 0.75rem; color: #bdaea3;
       text-transform: uppercase; letter-spacing: 3px;
+      font-style: italic;
     }
 
     /* ===== TOOLTIP ===== */
@@ -424,6 +449,7 @@
       transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
       position: relative; z-index: 1;
       letter-spacing: 0.5px;
+      font-variant-numeric: lining-nums;
     }
     .tl-year-btn.active-1986 {
       background: linear-gradient(135deg, #795548, #5d4037);
@@ -473,7 +499,6 @@
       font-size: 0.58rem; text-transform: uppercase;
       letter-spacing: 1.5px; color: #9eadc8; margin-top: 1px;
     }
-    /* Year badge that appears on switch */
     #year-badge {
       position: absolute; top: 20px; left: 50%;
       transform: translateX(-50%);
@@ -484,18 +509,17 @@
       letter-spacing: 4px;
       transition: all 0.6s ease;
       white-space: nowrap;
+      font-variant-numeric: lining-nums;
     }
     #year-badge.show {
       color: rgba(0,86,179,0.12);
       font-size: 6rem;
     }
-    /* compare tooltip */
     .tl-compare-hint {
       font-size: 0.6rem; color: #9eadc8;
       text-align: center; margin: 0 8px;
       line-height: 1.3; max-width: 80px;
     }
-    /* Transition overlay */
     #year-overlay {
       position: absolute; inset: 0; z-index: 999;
       pointer-events: none;
@@ -511,9 +535,13 @@
 
 <!-- Loading Screen -->
 <div id="loading">
-  <div class="loading-logo">🌏 VN GLOBAL</div>
+  <div class="loading-brand-badge">
+    <div class="loading-flag">★</div>
+    <div class="loading-subtitle">TẠP CHÍ SỐ — GEN Z</div>
+  </div>
+  <div class="loading-logo">VIỆT NAM – DẤU ẤN TOÀN CẦU</div>
   <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
-  <div class="loading-text">Đang tải dữ liệu toàn cầu...</div>
+  <div class="loading-text">✦ Đang kết nối mạng lưới dữ liệu toàn cầu ✦</div>
 </div>
 
 <div id="app">
@@ -523,14 +551,33 @@
       <div class="brand-flag"></div>
       <div class="brand-title">
         <h1>VIỆT NAM – DẤU ẤN TOÀN CẦU</h1>
-        <span>Interactive Global Influence Map • 2024</span>
+        <span>Interactive Global Influence Map • 2026</span>
       </div>
+      <a href="/" style="
+        margin-left: 20px;
+        background: rgba(200, 0, 10, 0.08);
+        border: 1px solid rgba(200, 0, 10, 0.2);
+        color: #c8000a;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+      " onmouseover="this.style.background='#c8000a'; this.style.color='#fff';" onmouseout="this.style.background='rgba(200, 0, 10, 0.08)'; this.style.color='#c8000a';">
+        ← Quay lại Tạp chí
+      </a>
     </div>
     <div class="header-stats">
       <div class="stat-item"><div class="num" id="stat-countries">193</div><div class="lbl">Quốc gia</div></div>
       <div class="stat-item"><div class="num" id="stat-comp">11</div><div class="lbl">ĐT Toàn Diện</div></div>
       <div class="stat-item"><div class="num" id="stat-strat">29</div><div class="lbl">ĐT Chiến Lược</div></div>
       <div class="stat-item"><div class="num" id="stat-vt">12</div><div class="lbl">Thị trường VT</div></div>
+      <div class="stat-item"><div class="num" id="stat-export">405 tỷ</div><div class="lbl">Xuất khẩu</div></div>
+      <div class="stat-item"><div class="num" id="stat-import">370 tỷ</div><div class="lbl">Nhập khẩu</div></div>
     </div>
     <div class="header-time">
       <div id="live-time">--:--:--</div>
@@ -583,6 +630,13 @@
         <span class="dot"></span>
         <span class="layer-label">Logistics & Kết nối</span>
         <span class="layer-badge">L6</span>
+        <span class="toggle-icon">●</span>
+      </button>
+
+      <button class="layer-btn l7 active" id="btn-l7" onclick="toggleLayer(7)">
+        <span class="dot"></span>
+        <span class="layer-label">Xuất khẩu & Nhập khẩu</span>
+        <span class="layer-badge">L7</span>
         <span class="toggle-icon">●</span>
       </button>
 

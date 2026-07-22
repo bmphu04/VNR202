@@ -393,7 +393,6 @@ export default function App() {
               <span>ĐỔI MỚI</span>
             </h2>
             <p className="intro-desc">Từ khủng hoảng 1986 đến khát vọng 2026</p>
-            <div className="intro-hint">✦ Chạm vào mỗi mốc trên dòng chảy lịch sử để khám phá ✦</div>
           </div>
 
           {/* 4. Zoomable Timeline Viewport */}
