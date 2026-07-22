@@ -27,6 +27,7 @@ const milestoneCoords: MilestoneCoord[] = [
 
 export default function App() {
   const pathRef = useRef<SVGPathElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   
   // App state
   const [currentTab, setCurrentTab] = useState<'timeline' | 'quiz' | 'minigame'>('timeline');
@@ -39,7 +40,7 @@ export default function App() {
   const [cameraTransitionClass, setCameraTransitionClass] = useState(true);
   
   // Dimension tracking
-  const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [viewportDimensions, setViewportDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   
   // SVG Path lengths
   const [totalPathLength, setTotalPathLength] = useState(0);
@@ -53,12 +54,38 @@ export default function App() {
   // Resize handler
   useEffect(() => {
     const handleResize = () => {
-      setDimensions({ width: window.innerWidth, height: window.innerHeight });
       if (window.innerWidth > 768) setMobileMenuOpen(false);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Monitor actual timeline-viewport dimensions dynamically
+  useEffect(() => {
+    const element = viewportRef.current;
+    if (!element) {
+      setViewportDimensions({ width: window.innerWidth, height: window.innerHeight });
+      return;
+    }
+
+    const handleResize = () => {
+      setViewportDimensions({
+        width: element.clientWidth,
+        height: element.clientHeight
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+
+    resizeObserver.observe(element);
+    handleResize();
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [currentTab]);
 
   // Compute path measurements once SVG path is loaded
   useEffect(() => {
@@ -90,11 +117,15 @@ export default function App() {
   }, []);
 
   // Compute responsive layout variables (Scale theo chiều rộng 2400 để line tràn viền màn hình hoàn hảo)
-  const fitScale = dimensions.width / 2400;
+  const fitScale = viewportDimensions.width / 2400;
+  
+  const isMobile = viewportDimensions.width <= 900;
   
   const overviewCamera = {
-    x: (dimensions.width - 2400 * fitScale) / 2,
-    y: (dimensions.height - 1000 * fitScale) / 2 + 120 * fitScale, // Shift down to avoid collision with header title
+    x: 0,
+    y: isMobile 
+      ? (viewportDimensions.height - 1000 * fitScale) / 2
+      : (viewportDimensions.height - 1000 * fitScale) / 2 + 120 * fitScale, // Shift down to avoid collision with header title
     scale: fitScale
   };
 
@@ -104,7 +135,7 @@ export default function App() {
       setCameraTransitionClass(true);
       setCamera(overviewCamera);
     }
-  }, [dimensions, activeMilestone, isTransitioning]);
+  }, [viewportDimensions, activeMilestone, isTransitioning]);
 
   // Animate line drawing in overview mode
   const drawLine = (fromLen: number, toLen: number, duration = 1200) => {
@@ -127,6 +158,8 @@ export default function App() {
     if (isTransitioning) return;
 
     const targetLength = milestoneLengths[index] || 0;
+    const isMobileViewport = viewportDimensions.width <= 900;
+    const scale = (isMobileViewport ? 3.8 : 3.2) * fitScale;
 
     if (activeMilestone === null) {
       // Zooming in from overview
@@ -135,12 +168,11 @@ export default function App() {
       // Animate line drawing
       drawLine(flowCurrentLength, targetLength, 1200);
 
-      // Camera Zoom calculations: Position active node on the left (25% width, 50% height)
+      // Camera Zoom calculations: Position active node on the left on desktop (25% width), center on mobile (50% width)
       setCameraTransitionClass(true);
-      const scale = 3.2 * fitScale;
       const zoomCam = {
-        x: dimensions.width * 0.25 - scale * milestoneCoords[index].x,
-        y: dimensions.height * 0.5 - scale * milestoneCoords[index].y,
+        x: (isMobileViewport ? viewportDimensions.width * 0.5 : viewportDimensions.width * 0.25) - scale * milestoneCoords[index].x,
+        y: viewportDimensions.height * 0.5 - scale * milestoneCoords[index].y,
         scale: scale
       };
       setCamera(zoomCam);
@@ -161,10 +193,9 @@ export default function App() {
         drawLine(flowCurrentLength, targetLength, 1000);
 
         setCameraTransitionClass(true);
-        const scale = 3.2 * fitScale;
         setCamera({
-          x: dimensions.width * 0.25 - scale * milestoneCoords[index].x,
-          y: dimensions.height * 0.5 - scale * milestoneCoords[index].y,
+          x: (isMobileViewport ? viewportDimensions.width * 0.5 : viewportDimensions.width * 0.25) - scale * milestoneCoords[index].x,
+          y: viewportDimensions.height * 0.5 - scale * milestoneCoords[index].y,
           scale: scale
         });
         setActiveMilestone(index);
@@ -214,6 +245,7 @@ export default function App() {
 
       const duration = 2500; // 2.5 seconds flight
       const startTime = performance.now();
+      const isMobileViewport = viewportDimensions.width <= 900;
 
       const travel = (now: number) => {
         const elapsed = now - startTime;
@@ -231,21 +263,23 @@ export default function App() {
             const pt = pathRef.current.getPointAtLength(currentLength);
 
             // Frame-by-frame camera positioning:
-            // Symmetrical Pan: Starts at 25% width, goes to 50% width during flight, ends at 25%
+            // Symmetrical Pan: Starts at 25% width, goes to 50% width during flight, ends at 25% (Desktop only)
             let sfX = 0.5;
-            if (p < 0.25) {
-              sfX = 0.25 + (p / 0.25) * 0.25;
-            } else if (p > 0.75) {
-              sfX = 0.5 - ((p - 0.75) / 0.25) * 0.25;
+            if (!isMobileViewport) {
+              if (p < 0.25) {
+                sfX = 0.25 + (p / 0.25) * 0.25;
+              } else if (p > 0.75) {
+                sfX = 0.5 - ((p - 0.75) / 0.25) * 0.25;
+              }
             }
 
             // Dive zoom: scales up in the middle of travel for immersive depth
-            const scaleMultiplier = 3.2 + Math.sin(p * Math.PI) * 1.0;
+            const scaleMultiplier = (isMobileViewport ? 3.8 : 3.2) + Math.sin(p * Math.PI) * 1.0;
             const currentScale = scaleMultiplier * fitScale;
 
             setCamera({
-              x: dimensions.width * sfX - currentScale * pt.x,
-              y: dimensions.height * 0.5 - currentScale * pt.y,
+              x: viewportDimensions.width * sfX - currentScale * pt.x,
+              y: viewportDimensions.height * 0.5 - currentScale * pt.y,
               scale: currentScale
             });
           } catch (e) {
@@ -396,7 +430,7 @@ export default function App() {
           </div>
 
           {/* 4. Zoomable Timeline Viewport */}
-          <div className="timeline-viewport">
+          <div className="timeline-viewport" ref={viewportRef}>
             <div 
               className={`timeline-canvas ${cameraTransitionClass ? 'camera-transition' : ''}`}
               style={{

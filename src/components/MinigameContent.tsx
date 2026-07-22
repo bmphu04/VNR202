@@ -5,6 +5,7 @@ import {
   useDraggable, 
   useDroppable,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors
 } from '@dnd-kit/core';
@@ -77,7 +78,10 @@ export default function MinigameContent() {
   const [isChecking, setIsChecking] = useState(false);
   const [score, setScore] = useState<number | null>(null);
 
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 180, tolerance: 6 } })
+  );
 
   const initGame = () => {
     const shuffled = [...HISTORICAL_EVENTS].sort(() => Math.random() - 0.5);
