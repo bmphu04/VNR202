@@ -20,12 +20,36 @@ interface EventData {
 
 // --- DỮ LIỆU GỐC ---
 const HISTORICAL_EVENTS: EventData[] = [
-  { id: "e1", year: "1975", text: "Đại thắng mùa Xuân, đất nước thống nhất, bước vào thời kỳ quá độ lên CNXH" },
-  { id: "e2", year: "1986", text: "Đại hội VI quyết định Đổi Mới toàn diện (Lạm phát chạm đỉnh 774%)" },
-  { id: "e3", year: "1989", text: "Bắt đầu có dự trữ và xuất khẩu gạo, bứt phá khỏi tình trạng thiếu đói" },
-  { id: "e4", year: "2006", text: "Việt Nam chính thức gia nhập Tổ chức Thương mại Thế giới (WTO)" },
-  { id: "e5", year: "2026", text: "Kỷ niệm 40 năm Đổi mới, hướng tới nước công nghiệp hiện đại" },
-  { id: "e6", year: "2045", text: "Khát vọng hiện thực hóa một Việt Nam phồn vinh, hạnh phúc" },
+  { 
+    id: "e1", 
+    year: "1986", 
+    text: "Đại hội VI quyết định 'Phá rào' Đổi Mới toàn diện trong bối cảnh lạm phát phi mã chạm đỉnh kỷ lục 774%." 
+  },
+  { 
+    id: "e2", 
+    year: "1989", 
+    text: "Chấm dứt hoàn toàn chế độ tem phiếu bao cấp, nhờ 'Khoán 10' vươn lên xuất khẩu chuyến gạo đầu tiên ra thế giới." 
+  },
+  { 
+    id: "e3", 
+    year: "1995", 
+    text: "Bước ngoặt ngoại giao kép: Chính thức bình thường hóa quan hệ với Hoa Kỳ và gia nhập khối ASEAN." 
+  },
+  { 
+    id: "e4", 
+    year: "2007", 
+    text: "Vươn mình ra biển lớn: Trở thành thành viên thứ 150 của WTO và ban hành Nghị quyết 09 về Chiến lược biển." 
+  },
+  { 
+    id: "e5", 
+    year: "2020", 
+    text: "Tín nhiệm quốc tế đạt kỷ lục: Trúng cử Ủy viên không thường trực HĐBA Liên Hợp Quốc với số phiếu 192/193." 
+  },
+  { 
+    id: "e6", 
+    year: "2026", 
+    text: "Kỷ niệm 40 năm Đổi mới: Áp dụng bắt buộc tiêu chuẩn toàn cầu IFRS, ESG và Luật BHXH mới (tối thiểu 15 năm)." 
+  },
 ];
 
 // --- COMPONENT THẺ KÉO (DRAGGABLE) ---
@@ -72,7 +96,7 @@ function DroppableSlot({ year, currentEvent, isChecking }: { year: string, curre
 export default function MinigameContent() {
   const [pool, setPool] = useState<EventData[]>([]);
   const [slots, setSlots] = useState<Record<string, EventData | null>>({
-    "1975": null, "1986": null, "1989": null, "2006": null, "2026": null, "2045": null
+    "1986": null, "1989": null, "1995": null, "2007": null, "2020": null, "2026": null
   });
   const [activeEvent, setActiveEvent] = useState<EventData | null>(null);
   const [isChecking, setIsChecking] = useState(false);
@@ -86,7 +110,7 @@ export default function MinigameContent() {
   const initGame = () => {
     const shuffled = [...HISTORICAL_EVENTS].sort(() => Math.random() - 0.5);
     setPool(shuffled);
-    setSlots({ "1975": null, "1986": null, "1989": null, "2006": null, "2026": null, "2045": null });
+    setSlots({ "1986": null, "1989": null, "1995": null, "2007": null, "2020": null, "2026": null });
     setIsChecking(false);
     setScore(null);
   };
