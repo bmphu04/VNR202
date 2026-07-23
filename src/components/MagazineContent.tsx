@@ -5,6 +5,11 @@ import img95_1 from '../assets/95.1.jpg';
 import img95_2 from '../assets/95.2.jpg';
 import img95_3 from '../assets/95.3.jpg';
 import img07_1 from '../assets/1784633975641_183231507058871077_g6777374503551308705_d14eb3522f27ce7caecf12b6f7d96563.jpg';
+import img100 from '../assets/100.jpg';
+import img101 from '../assets/101.jpg';
+import img102 from '../assets/102.jpg';
+import img145 from '../assets/145.jpg';
+import img123 from '../assets/123.jpg';
 
 export interface MediaItem {
   type: 'image' | 'video';
@@ -201,21 +206,21 @@ export const milestonesData: MilestoneData[] = [
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/kXYiU_JCYtU",
+        url: "https://www.youtube.com/embed/xMg-rN3-HVA",
         title: "Tư liệu: Trúng cử HĐBA Liên Hợp Quốc 192/193 phiếu",
         caption: "Khoảnh khắc đại sảnh Đại hội đồng LHQ vang dội tiếng vỗ tay chúc mừng chiến thắng kỷ lục của Việt Nam."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
-        title: "Sứ mệnh Gìn giữ Hòa bình LHQ",
-        caption: "Lực lượng mũ nồi xanh Việt Nam lên đường tham gia sứ mệnh an ninh nhân đạo tại Nam Sudan."
+        url: img100,
+        title: "Vị thế đối ngoại (Hội đồng Bảo an LHQ)",
+        caption: "Phòng họp Hội đồng Bảo an Liên Hợp Quốc (Nơi Việt Nam điều hành với tư cách Chủ tịch)."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
-        title: "Bứt phá hạ tầng công nghệ số",
-        caption: "Hệ thống viễn thông 4G/5G và nền tảng kinh tế số phủ sóng rộng khắp cả nước."
+        url: img101,
+        title: "Kinh tế tri thức & Chuyển đổi số",
+        caption: "Hạ tầng đô thị thông minh và hiện đại tại Việt Nam."
       }
     ]
   },
@@ -239,20 +244,14 @@ export const milestonesData: MilestoneData[] = [
     ],
     media: [
       {
-        type: "video",
-        url: "https://www.youtube.com/embed/ScMzIvxBSi4",
-        title: "Video: Tiêu chuẩn Quản trị & Kinh tế xanh 2026",
-        caption: "Tổng quan các chuẩn mực quốc tế IFRS, ESG và chuyển đổi số VNeID định hình Việt Nam 2026."
+        type: "image",
+        url: img102,
+        title: "Kinh tế tiêu chuẩn toàn cầu & Khát vọng",
+        caption: "Tòa nhà Landmark 81 (Biểu tượng cho sức mạnh kinh tế và khát vọng vươn cao của Việt Nam thời kỳ mới)."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
-        title: "Kinh tế xanh & Tiêu chuẩn ESG",
-        caption: "Doanh nghiệp niêm yết chuyển đổi sang mô hình vận hành bền vững đạt chuẩn toàn cầu."
-      },
-      {
-        type: "image",
-        url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80",
+        url: img145,
         title: "Hệ sinh thái số Gen Z",
         caption: "Thế hệ trẻ làm chủ công nghệ AI và nền tảng số trong kỷ nguyên quản trị 4.0."
       }
@@ -279,21 +278,15 @@ export const milestonesData: MilestoneData[] = [
     media: [
       {
         type: "video",
-        url: "https://www.youtube.com/embed/EngW7tLk60g",
+        url: "https://www.youtube.com/embed/KyD4Lbs6YXY",
         title: "Phim tư liệu đặc biệt: 40 Năm Đổi Mới - Hành trình khát vọng",
         caption: "Phim tư liệu toàn cảnh nhìn lại 40 năm tự lực tự cường và khát vọng bứt phá vươn mình của dân tộc."
       },
       {
         type: "image",
-        url: "https://images.unsplash.com/photo-1477959858617-67f30ac4ce78?auto=format&fit=crop&w=1000&q=80",
+        url: img123,
         title: "Việt Nam rực rỡ sau 40 năm Đổi Mới",
         caption: "Toàn cảnh đô thị hiện đại và sức sống phát triển sôi động của đất nước sau 4 thập kỷ."
-      },
-      {
-        type: "image",
-        url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80",
-        title: "Khát vọng Gen Z hướng tới 2045",
-        caption: "Thế hệ trẻ Việt Nam tự tin, năng động sẵn sàng đưa đất nước trở thành cường quốc phát triển."
       }
     ]
   }
